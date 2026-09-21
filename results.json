@@ -1,0 +1,2561 @@
+{
+ "patient": {
+  "name": "Maya R.",
+  "age": 34,
+  "sex": "F",
+  "visit": "Outpatient psychiatry follow-up, 6 weeks after starting sertraline"
+ },
+ "model": "jev-1.13.0",
+ "run_at": "2026-09-21 01:13",
+ "wall_s": 6.9,
+ "calls": 111,
+ "input_tokens": 321264,
+ "output_tokens": 32171,
+ "claims": [
+  {
+   "id": "C01",
+   "section": "Chief Complaint / Reason for Visit",
+   "text": "Follow-up for major depressive disorder and generalized anxiety disorder, six weeks after initiation of sertraline.",
+   "seed": "ok",
+   "verdict": "supported",
+   "confidence": 0.71,
+   "probs": {
+    "contradicted": 0.0,
+    "ambiguous": 0.28,
+    "not_found": 0.01,
+    "supported": 0.71
+   },
+   "source": "T01",
+   "source_conf": 0.79,
+   "source_alts": [
+    [
+     "T01",
+     0.79
+    ],
+    [
+     "T26",
+     0.08
+    ]
+   ],
+   "usage": {
+    "input_tokens": 6027,
+    "output_tokens": 740
+   },
+   "latency_s": 0.43
+  },
+  {
+   "id": "C02",
+   "section": "Interval History",
+   "text": "Patient reports overall improvement in mood, rating it 5/10 today compared with 2-3/10 at the prior visit.",
+   "seed": "ok",
+   "verdict": "supported",
+   "confidence": 0.99,
+   "probs": {
+    "supported": 0.99,
+    "ambiguous": 0.01,
+    "contradicted": 0.0,
+    "not_found": 0.0
+   },
+   "source": "T04",
+   "source_conf": 1.0,
+   "source_alts": [
+    [
+     "T04",
+     1.0
+    ]
+   ],
+   "usage": {
+    "input_tokens": 6036,
+    "output_tokens": 740
+   },
+   "latency_s": 0.39
+  },
+  {
+   "id": "C03",
+   "section": "Interval History",
+   "text": "She reports she is no longer tearful before work.",
+   "seed": "ok",
+   "verdict": "supported",
+   "confidence": 0.97,
+   "probs": {
+    "not_found": 0.0,
+    "ambiguous": 0.03,
+    "contradicted": 0.0,
+    "supported": 0.97
+   },
+   "source": "T02",
+   "source_conf": 1.0,
+   "source_alts": [
+    [
+     "T02",
+     1.0
+    ]
+   ],
+   "usage": {
+    "input_tokens": 6018,
+    "output_tokens": 740
+   },
+   "latency_s": 0.45
+  },
+  {
+   "id": "C04",
+   "section": "Interval History",
+   "text": "Sleep has improved.",
+   "seed": "ambiguous",
+   "verdict": "ambiguous",
+   "confidence": 0.61,
+   "probs": {
+    "ambiguous": 0.61,
+    "not_found": 0.0,
+    "contradicted": 0.0,
+    "supported": 0.39
+   },
+   "source": "T06",
+   "source_conf": 1.0,
+   "source_alts": [
+    [
+     "T06",
+     1.0
+    ]
+   ],
+   "usage": {
+    "input_tokens": 6011,
+    "output_tokens": 742
+   },
+   "latency_s": 0.42
+  },
+  {
+   "id": "C05",
+   "section": "Interval History",
+   "text": "Appetite has improved and she has regained some weight.",
+   "seed": "hallucinated",
+   "verdict": "not_found",
+   "confidence": 1.0,
+   "probs": {
+    "supported": 0.0,
+    "contradicted": 0.0,
+    "ambiguous": 0.0,
+    "not_found": 1.0
+   },
+   "source": "none",
+   "source_conf": 1.0,
+   "source_alts": [
+    [
+     "none",
+     1.0
+    ]
+   ],
+   "usage": {
+    "input_tokens": 6018,
+    "output_tokens": 739
+   },
+   "latency_s": 0.41
+  },
+  {
+   "id": "C06",
+   "section": "Interval History",
+   "text": "Energy remains low, with fatigue by mid-afternoon.",
+   "seed": "ok",
+   "verdict": "supported",
+   "confidence": 1.0,
+   "probs": {
+    "contradicted": 0.0,
+    "not_found": 0.0,
+    "ambiguous": 0.0,
+    "supported": 1.0
+   },
+   "source": "T14",
+   "source_conf": 1.0,
+   "source_alts": [
+    [
+     "T14",
+     1.0
+    ]
+   ],
+   "usage": {
+    "input_tokens": 6019,
+    "output_tokens": 740
+   },
+   "latency_s": 0.45
+  },
+  {
+   "id": "C07",
+   "section": "Interval History",
+   "text": "Concentration at work has improved, and this has been noticed by her manager.",
+   "seed": "ok",
+   "verdict": "supported",
+   "confidence": 1.0,
+   "probs": {
+    "not_found": 0.0,
+    "ambiguous": 0.0,
+    "contradicted": 0.0,
+    "supported": 1.0
+   },
+   "source": "T16",
+   "source_conf": 1.0,
+   "source_alts": [
+    [
+     "T16",
+     1.0
+    ]
+   ],
+   "usage": {
+    "input_tokens": 6024,
+    "output_tokens": 740
+   },
+   "latency_s": 0.41
+  },
+  {
+   "id": "C08",
+   "section": "Interval History",
+   "text": "Anhedonia is resolving; she has resumed painting regularly.",
+   "seed": "contradicted",
+   "verdict": "contradicted",
+   "confidence": 0.71,
+   "probs": {
+    "supported": 0.0,
+    "ambiguous": 0.29,
+    "contradicted": 0.71,
+    "not_found": 0.0
+   },
+   "source": "T18",
+   "source_conf": 1.0,
+   "source_alts": [
+    [
+     "T18",
+     1.0
+    ]
+   ],
+   "usage": {
+    "input_tokens": 6019,
+    "output_tokens": 743
+   },
+   "latency_s": 0.42
+  },
+  {
+   "id": "C09",
+   "section": "Interval History",
+   "text": "She reports a significant stressor: her grandmother, who raised her, died three weeks ago, and she attended the funeral out of state.",
+   "seed": "ok",
+   "verdict": "supported",
+   "confidence": 1.0,
+   "probs": {
+    "not_found": 0.0,
+    "supported": 1.0,
+    "ambiguous": 0.0,
+    "contradicted": 0.0
+   },
+   "source": "T20",
+   "source_conf": 1.0,
+   "source_alts": [
+    [
+     "T20",
+     1.0
+    ]
+   ],
+   "usage": {
+    "input_tokens": 6036,
+    "output_tokens": 740
+   },
+   "latency_s": 0.41
+  },
+  {
+   "id": "C10",
+   "section": "Interval History",
+   "text": "She missed one week of work for the funeral.",
+   "seed": "contradicted",
+   "verdict": "contradicted",
+   "confidence": 0.82,
+   "probs": {
+    "supported": 0.03,
+    "not_found": 0.0,
+    "ambiguous": 0.15,
+    "contradicted": 0.82
+   },
+   "source": "T24",
+   "source_conf": 1.0,
+   "source_alts": [
+    [
+     "T24",
+     1.0
+    ]
+   ],
+   "usage": {
+    "input_tokens": 6017,
+    "output_tokens": 743
+   },
+   "latency_s": 0.41
+  },
+  {
+   "id": "C11",
+   "section": "Anxiety",
+   "text": "Panic attacks have resolved.",
+   "seed": "ambiguous",
+   "verdict": "contradicted",
+   "confidence": 0.82,
+   "probs": {
+    "ambiguous": 0.18,
+    "not_found": 0.0,
+    "supported": 0.0,
+    "contradicted": 0.82
+   },
+   "source": "T26",
+   "source_conf": 1.0,
+   "source_alts": [
+    [
+     "T26",
+     1.0
+    ]
+   ],
+   "usage": {
+    "input_tokens": 6013,
+    "output_tokens": 743
+   },
+   "latency_s": 0.4
+  },
+  {
+   "id": "C12",
+   "section": "Anxiety",
+   "text": "Background worry persists but is reduced in intensity.",
+   "seed": "ok",
+   "verdict": "supported",
+   "confidence": 1.0,
+   "probs": {
+    "contradicted": 0.0,
+    "supported": 1.0,
+    "not_found": 0.0,
+    "ambiguous": 0.0
+   },
+   "source": "T28",
+   "source_conf": 1.0,
+   "source_alts": [
+    [
+     "T28",
+     1.0
+    ]
+   ],
+   "usage": {
+    "input_tokens": 6016,
+    "output_tokens": 740
+   },
+   "latency_s": 0.38
+  },
+  {
+   "id": "C13",
+   "section": "Substance Use",
+   "text": "Patient denies alcohol use.",
+   "seed": "contradicted",
+   "verdict": "contradicted",
+   "confidence": 1.0,
+   "probs": {
+    "not_found": 0.0,
+    "supported": 0.0,
+    "ambiguous": 0.0,
+    "contradicted": 1.0
+   },
+   "source": "T30",
+   "source_conf": 1.0,
+   "source_alts": [
+    [
+     "T30",
+     1.0
+    ]
+   ],
+   "usage": {
+    "input_tokens": 6012,
+    "output_tokens": 743
+   },
+   "latency_s": 0.38
+  },
+  {
+   "id": "C14",
+   "section": "Substance Use",
+   "text": "She denies cannabis or other illicit drug use.",
+   "seed": "contradicted",
+   "verdict": "contradicted",
+   "confidence": 0.8,
+   "probs": {
+    "ambiguous": 0.16,
+    "contradicted": 0.8,
+    "supported": 0.04,
+    "not_found": 0.0
+   },
+   "source": "T34",
+   "source_conf": 1.0,
+   "source_alts": [
+    [
+     "T34",
+     1.0
+    ]
+   ],
+   "usage": {
+    "input_tokens": 6016,
+    "output_tokens": 743
+   },
+   "latency_s": 0.43
+  },
+  {
+   "id": "C15",
+   "section": "Substance Use",
+   "text": "Caffeine intake is two cups of coffee in the morning and occasionally an afternoon energy drink.",
+   "seed": "ok",
+   "verdict": "supported",
+   "confidence": 0.99,
+   "probs": {
+    "not_found": 0.0,
+    "supported": 0.99,
+    "ambiguous": 0.01,
+    "contradicted": 0.0
+   },
+   "source": "T36",
+   "source_conf": 1.0,
+   "source_alts": [
+    [
+     "T36",
+     1.0
+    ]
+   ],
+   "usage": {
+    "input_tokens": 6026,
+    "output_tokens": 740
+   },
+   "latency_s": 0.44
+  },
+  {
+   "id": "C16",
+   "section": "Safety Assessment",
+   "text": "Patient denies suicidal ideation.",
+   "seed": "contradicted",
+   "verdict": "contradicted",
+   "confidence": 0.99,
+   "probs": {
+    "supported": 0.0,
+    "contradicted": 0.99,
+    "ambiguous": 0.01,
+    "not_found": 0.0
+   },
+   "source": "T38",
+   "source_conf": 1.0,
+   "source_alts": [
+    [
+     "T38",
+     1.0
+    ]
+   ],
+   "usage": {
+    "input_tokens": 6013,
+    "output_tokens": 743
+   },
+   "latency_s": 0.38
+  },
+  {
+   "id": "C17",
+   "section": "Safety Assessment",
+   "text": "She denies homicidal ideation.",
+   "seed": "ok",
+   "verdict": "supported",
+   "confidence": 1.0,
+   "probs": {
+    "supported": 1.0,
+    "ambiguous": 0.0,
+    "contradicted": 0.0,
+    "not_found": 0.0
+   },
+   "source": "T42",
+   "source_conf": 1.0,
+   "source_alts": [
+    [
+     "T42",
+     1.0
+    ]
+   ],
+   "usage": {
+    "input_tokens": 6015,
+    "output_tokens": 740
+   },
+   "latency_s": 0.41
+  },
+  {
+   "id": "C18",
+   "section": "Safety Assessment",
+   "text": "Patient agreed to remove the firearm from the home.",
+   "seed": "ambiguous",
+   "verdict": "contradicted",
+   "confidence": 0.77,
+   "probs": {
+    "supported": 0.0,
+    "ambiguous": 0.23,
+    "contradicted": 0.77,
+    "not_found": 0.0
+   },
+   "source": "T46",
+   "source_conf": 1.0,
+   "source_alts": [
+    [
+     "T46",
+     1.0
+    ]
+   ],
+   "usage": {
+    "input_tokens": 6017,
+    "output_tokens": 743
+   },
+   "latency_s": 0.39
+  },
+  {
+   "id": "C19",
+   "section": "Safety Assessment",
+   "text": "Safety plan completed and 988 crisis line provided.",
+   "seed": "ok",
+   "verdict": "ambiguous",
+   "confidence": 0.88,
+   "probs": {
+    "supported": 0.08,
+    "contradicted": 0.02,
+    "ambiguous": 0.88,
+    "not_found": 0.02
+   },
+   "source": "T68",
+   "source_conf": 0.73,
+   "source_alts": [
+    [
+     "T68",
+     0.73
+    ],
+    [
+     "T67",
+     0.24
+    ]
+   ],
+   "usage": {
+    "input_tokens": 6019,
+    "output_tokens": 742
+   },
+   "latency_s": 0.39
+  },
+  {
+   "id": "C20",
+   "section": "Medications and Tolerability",
+   "text": "Current medication: sertraline 100 mg daily.",
+   "seed": "contradicted",
+   "verdict": "contradicted",
+   "confidence": 0.93,
+   "probs": {
+    "ambiguous": 0.06,
+    "not_found": 0.0,
+    "supported": 0.01,
+    "contradicted": 0.93
+   },
+   "source": "T54",
+   "source_conf": 0.93,
+   "source_alts": [
+    [
+     "T54",
+     0.93
+    ],
+    [
+     "T61",
+     0.07
+    ]
+   ],
+   "usage": {
+    "input_tokens": 6020,
+    "output_tokens": 743
+   },
+   "latency_s": 0.42
+  },
+  {
+   "id": "C21",
+   "section": "Medications and Tolerability",
+   "text": "Adherence is good, with approximately two missed doses in six weeks.",
+   "seed": "ok",
+   "verdict": "supported",
+   "confidence": 0.98,
+   "probs": {
+    "ambiguous": 0.02,
+    "supported": 0.98,
+    "not_found": 0.0,
+    "contradicted": 0.0
+   },
+   "source": "T52",
+   "source_conf": 1.0,
+   "source_alts": [
+    [
+     "T52",
+     1.0
+    ]
+   ],
+   "usage": {
+    "input_tokens": 6022,
+    "output_tokens": 740
+   },
+   "latency_s": 0.39
+  },
+  {
+   "id": "C22",
+   "section": "Medications and Tolerability",
+   "text": "She is tolerating sertraline well without side effects.",
+   "seed": "contradicted",
+   "verdict": "contradicted",
+   "confidence": 0.82,
+   "probs": {
+    "contradicted": 0.82,
+    "ambiguous": 0.18,
+    "not_found": 0.0,
+    "supported": 0.0
+   },
+   "source": "T48",
+   "source_conf": 1.0,
+   "source_alts": [
+    [
+     "T48",
+     1.0
+    ]
+   ],
+   "usage": {
+    "input_tokens": 6020,
+    "output_tokens": 743
+   },
+   "latency_s": 0.41
+  },
+  {
+   "id": "C23",
+   "section": "Medications and Tolerability",
+   "text": "Initial nausea during the first two weeks has resolved.",
+   "seed": "ok",
+   "verdict": "supported",
+   "confidence": 1.0,
+   "probs": {
+    "contradicted": 0.0,
+    "not_found": 0.0,
+    "supported": 1.0,
+    "ambiguous": 0.0
+   },
+   "source": "T48",
+   "source_conf": 0.99,
+   "source_alts": [
+    [
+     "T48",
+     0.99
+    ]
+   ],
+   "usage": {
+    "input_tokens": 6017,
+    "output_tokens": 740
+   },
+   "latency_s": 0.37
+  },
+  {
+   "id": "C24",
+   "section": "Psychosocial and Family History",
+   "text": "Family history is significant for bipolar disorder in her mother.",
+   "seed": "hallucinated",
+   "verdict": "not_found",
+   "confidence": 1.0,
+   "probs": {
+    "not_found": 1.0,
+    "supported": 0.0,
+    "ambiguous": 0.0,
+    "contradicted": 0.0
+   },
+   "source": "none",
+   "source_conf": 1.0,
+   "source_alts": [
+    [
+     "none",
+     1.0
+    ]
+   ],
+   "usage": {
+    "input_tokens": 6018,
+    "output_tokens": 739
+   },
+   "latency_s": 0.39
+  },
+  {
+   "id": "C25",
+   "section": "Psychosocial and Family History",
+   "text": "She is currently engaged in weekly cognitive behavioral therapy.",
+   "seed": "contradicted",
+   "verdict": "contradicted",
+   "confidence": 0.93,
+   "probs": {
+    "contradicted": 0.93,
+    "supported": 0.0,
+    "not_found": 0.06,
+    "ambiguous": 0.01
+   },
+   "source": "T56",
+   "source_conf": 1.0,
+   "source_alts": [
+    [
+     "T56",
+     1.0
+    ]
+   ],
+   "usage": {
+    "input_tokens": 6017,
+    "output_tokens": 743
+   },
+   "latency_s": 0.42
+  },
+  {
+   "id": "C26",
+   "section": "Psychosocial and Family History",
+   "text": "She is not planning pregnancy and uses oral contraception.",
+   "seed": "ok",
+   "verdict": "supported",
+   "confidence": 1.0,
+   "probs": {
+    "contradicted": 0.0,
+    "ambiguous": 0.0,
+    "not_found": 0.0,
+    "supported": 1.0
+   },
+   "source": "T58",
+   "source_conf": 1.0,
+   "source_alts": [
+    [
+     "T58",
+     1.0
+    ]
+   ],
+   "usage": {
+    "input_tokens": 6017,
+    "output_tokens": 740
+   },
+   "latency_s": 0.4
+  },
+  {
+   "id": "C27",
+   "section": "Mental Status Examination",
+   "text": "Well groomed, cooperative, with good eye contact.",
+   "seed": "observation",
+   "verdict": "not_found",
+   "confidence": 0.99,
+   "probs": {
+    "supported": 0.01,
+    "ambiguous": 0.0,
+    "contradicted": 0.0,
+    "not_found": 0.99
+   },
+   "source": "none",
+   "source_conf": 0.95,
+   "source_alts": [
+    [
+     "none",
+     0.95
+    ]
+   ],
+   "usage": {
+    "input_tokens": 6018,
+    "output_tokens": 739
+   },
+   "latency_s": 0.37
+  },
+  {
+   "id": "C28",
+   "section": "Mental Status Examination",
+   "text": "Affect is constricted but reactive.",
+   "seed": "observation",
+   "verdict": "not_found",
+   "confidence": 0.85,
+   "probs": {
+    "not_found": 0.85,
+    "contradicted": 0.0,
+    "ambiguous": 0.12,
+    "supported": 0.03
+   },
+   "source": "T22",
+   "source_conf": 0.3,
+   "source_alts": [
+    [
+     "T22",
+     0.3
+    ],
+    [
+     "T18",
+     0.2
+    ],
+    [
+     "none",
+     0.16
+    ]
+   ],
+   "usage": {
+    "input_tokens": 6017,
+    "output_tokens": 741
+   },
+   "latency_s": 0.44
+  },
+  {
+   "id": "C29",
+   "section": "Mental Status Examination",
+   "text": "Thought process is linear and goal directed; no evidence of psychosis.",
+   "seed": "observation",
+   "verdict": "supported",
+   "confidence": 0.54,
+   "probs": {
+    "ambiguous": 0.18,
+    "supported": 0.54,
+    "not_found": 0.28,
+    "contradicted": 0.0
+   },
+   "source": "none",
+   "source_conf": 0.25,
+   "source_alts": [
+    [
+     "none",
+     0.25
+    ],
+    [
+     "T38",
+     0.2
+    ],
+    [
+     "T16",
+     0.15
+    ]
+   ],
+   "usage": {
+    "input_tokens": 6022,
+    "output_tokens": 738
+   },
+   "latency_s": 0.38
+  },
+  {
+   "id": "C30",
+   "section": "Assessment",
+   "text": "PHQ-9 today is 14, down from 19 at the initial visit, consistent with partial response to sertraline.",
+   "seed": "ok",
+   "verdict": "supported",
+   "confidence": 1.0,
+   "probs": {
+    "ambiguous": 0.0,
+    "contradicted": 0.0,
+    "not_found": 0.0,
+    "supported": 1.0
+   },
+   "source": "T59",
+   "source_conf": 0.9,
+   "source_alts": [
+    [
+     "T59",
+     0.9
+    ],
+    [
+     "T60",
+     0.1
+    ]
+   ],
+   "usage": {
+    "input_tokens": 6036,
+    "output_tokens": 740
+   },
+   "latency_s": 0.39
+  },
+  {
+   "id": "C31",
+   "section": "Assessment",
+   "text": "Major depressive disorder, recurrent, moderate, with partial response; generalized anxiety disorder, improving; bereavement.",
+   "seed": "ok",
+   "verdict": "ambiguous",
+   "confidence": 0.61,
+   "probs": {
+    "supported": 0.35,
+    "ambiguous": 0.61,
+    "contradicted": 0.01,
+    "not_found": 0.03
+   },
+   "source": "T59",
+   "source_conf": 0.8,
+   "source_alts": [
+    [
+     "T59",
+     0.8
+    ],
+    [
+     "T20",
+     0.08
+    ]
+   ],
+   "usage": {
+    "input_tokens": 6029,
+    "output_tokens": 742
+   },
+   "latency_s": 0.57
+  },
+  {
+   "id": "C32",
+   "section": "Plan",
+   "text": "Increase sertraline to 100 mg daily.",
+   "seed": "ok",
+   "verdict": "supported",
+   "confidence": 0.99,
+   "probs": {
+    "contradicted": 0.0,
+    "supported": 0.99,
+    "ambiguous": 0.01,
+    "not_found": 0.0
+   },
+   "source": "T61",
+   "source_conf": 0.8,
+   "source_alts": [
+    [
+     "T61",
+     0.8
+    ],
+    [
+     "T64",
+     0.17
+    ]
+   ],
+   "usage": {
+    "input_tokens": 6019,
+    "output_tokens": 740
+   },
+   "latency_s": 0.41
+  },
+  {
+   "id": "C33",
+   "section": "Plan",
+   "text": "Add bupropion for sexual side effects.",
+   "seed": "contradicted",
+   "verdict": "ambiguous",
+   "confidence": 0.75,
+   "probs": {
+    "contradicted": 0.23,
+    "supported": 0.01,
+    "ambiguous": 0.75,
+    "not_found": 0.01
+   },
+   "source": "T63",
+   "source_conf": 0.9,
+   "source_alts": [
+    [
+     "T63",
+     0.9
+    ],
+    [
+     "T48",
+     0.07
+    ]
+   ],
+   "usage": {
+    "input_tokens": 6017,
+    "output_tokens": 742
+   },
+   "latency_s": 0.39
+  },
+  {
+   "id": "C34",
+   "section": "Plan",
+   "text": "Discontinue trazodone.",
+   "seed": "contradicted",
+   "verdict": "contradicted",
+   "confidence": 1.0,
+   "probs": {
+    "ambiguous": 0.0,
+    "supported": 0.0,
+    "contradicted": 1.0,
+    "not_found": 0.0
+   },
+   "source": "T65",
+   "source_conf": 0.92,
+   "source_alts": [
+    [
+     "T65",
+     0.92
+    ],
+    [
+     "T12",
+     0.06
+    ]
+   ],
+   "usage": {
+    "input_tokens": 6014,
+    "output_tokens": 743
+   },
+   "latency_s": 0.37
+  },
+  {
+   "id": "C35",
+   "section": "Plan",
+   "text": "Reduce afternoon caffeine.",
+   "seed": "ok",
+   "verdict": "supported",
+   "confidence": 0.96,
+   "probs": {
+    "not_found": 0.0,
+    "supported": 0.96,
+    "contradicted": 0.0,
+    "ambiguous": 0.04
+   },
+   "source": "T65",
+   "source_conf": 0.58,
+   "source_alts": [
+    [
+     "T65",
+     0.58
+    ],
+    [
+     "T36",
+     0.35
+    ],
+    [
+     "T66",
+     0.07
+    ]
+   ],
+   "usage": {
+    "input_tokens": 6011,
+    "output_tokens": 740
+   },
+   "latency_s": 0.38
+  },
+  {
+   "id": "C36",
+   "section": "Plan",
+   "text": "Referral to hospital grief support group.",
+   "seed": "ok",
+   "verdict": "supported",
+   "confidence": 1.0,
+   "probs": {
+    "contradicted": 0.0,
+    "supported": 1.0,
+    "not_found": 0.0,
+    "ambiguous": 0.0
+   },
+   "source": "T70",
+   "source_conf": 0.54,
+   "source_alts": [
+    [
+     "T70",
+     0.54
+    ],
+    [
+     "T69",
+     0.46
+    ]
+   ],
+   "usage": {
+    "input_tokens": 6016,
+    "output_tokens": 740
+   },
+   "latency_s": 0.37
+  },
+  {
+   "id": "C37",
+   "section": "Plan",
+   "text": "Return to clinic in six weeks, sooner if symptoms worsen.",
+   "seed": "contradicted",
+   "verdict": "contradicted",
+   "confidence": 0.98,
+   "probs": {
+    "not_found": 0.0,
+    "ambiguous": 0.02,
+    "supported": 0.0,
+    "contradicted": 0.98
+   },
+   "source": "T71",
+   "source_conf": 0.8,
+   "source_alts": [
+    [
+     "T71",
+     0.8
+    ],
+    [
+     "T72",
+     0.2
+    ]
+   ],
+   "usage": {
+    "input_tokens": 6020,
+    "output_tokens": 743
+   },
+   "latency_s": 0.41
+  }
+ ],
+ "turns": [
+  {
+   "id": "T01",
+   "t": "00:00",
+   "speaker": "DR",
+   "text": "Hi Maya, good to see you. It's been about six weeks since we started the sertraline. How have things been overall?",
+   "capture": "not_clinical",
+   "confidence": 0.93,
+   "probs": {
+    "contradicted": 0.01,
+    "captured": 0.04,
+    "not_clinical": 0.93,
+    "omitted": 0.0,
+    "partially": 0.02
+   },
+   "usage": {
+    "input_tokens": 1319,
+    "output_tokens": 65
+   },
+   "latency_s": 0.33
+  },
+  {
+   "id": "T02",
+   "t": "00:09",
+   "speaker": "PT",
+   "text": "Honestly, a little better. Not great, but I'm not crying in the car before work anymore, so that's something.",
+   "capture": "captured",
+   "confidence": 0.9,
+   "probs": {
+    "contradicted": 0.02,
+    "captured": 0.9,
+    "not_clinical": 0.01,
+    "omitted": 0.0,
+    "partially": 0.07
+   },
+   "usage": {
+    "input_tokens": 1346,
+    "output_tokens": 63
+   },
+   "latency_s": 0.33
+  },
+  {
+   "id": "T03",
+   "t": "00:18",
+   "speaker": "DR",
+   "text": "That's real progress. If you had to put your mood on a zero to ten, ten being your best self, where are you today?",
+   "capture": "not_clinical",
+   "confidence": 0.5,
+   "probs": {
+    "omitted": 0.01,
+    "captured": 0.39,
+    "not_clinical": 0.5,
+    "contradicted": 0.01,
+    "partially": 0.09
+   },
+   "usage": {
+    "input_tokens": 1347,
+    "output_tokens": 65
+   },
+   "latency_s": 0.35
+  },
+  {
+   "id": "T04",
+   "t": "00:26",
+   "speaker": "PT",
+   "text": "Maybe a five? Last time I think I said a two or three.",
+   "capture": "captured",
+   "confidence": 0.99,
+   "probs": {
+    "not_clinical": 0.01,
+    "contradicted": 0.0,
+    "captured": 0.99,
+    "omitted": 0.0,
+    "partially": 0.0
+   },
+   "usage": {
+    "input_tokens": 1336,
+    "output_tokens": 63
+   },
+   "latency_s": 0.32
+  },
+  {
+   "id": "T05",
+   "t": "00:31",
+   "speaker": "DR",
+   "text": "Okay. And how has your sleep been since we started the medication?",
+   "capture": "not_clinical",
+   "confidence": 0.58,
+   "probs": {
+    "omitted": 0.01,
+    "not_clinical": 0.58,
+    "captured": 0.35,
+    "partially": 0.05,
+    "contradicted": 0.01
+   },
+   "usage": {
+    "input_tokens": 1321,
+    "output_tokens": 65
+   },
+   "latency_s": 0.28
+  },
+  {
+   "id": "T06",
+   "t": "00:36",
+   "speaker": "PT",
+   "text": "A little better. I fall asleep faster than I used to, but I still wake up around four in the morning most days and can't get back to sleep.",
+   "capture": "partially",
+   "confidence": 0.9,
+   "probs": {
+    "partially": 0.9,
+    "contradicted": 0.02,
+    "captured": 0.01,
+    "not_clinical": 0.0,
+    "omitted": 0.07
+   },
+   "usage": {
+    "input_tokens": 1339,
+    "output_tokens": 64
+   },
+   "latency_s": 0.33
+  },
+  {
+   "id": "T07",
+   "t": "00:47",
+   "speaker": "DR",
+   "text": "How many nights a week would you say you're waking early like that?",
+   "capture": "not_clinical",
+   "confidence": 0.44,
+   "probs": {
+    "not_clinical": 0.44,
+    "contradicted": 0.04,
+    "omitted": 0.22,
+    "captured": 0.02,
+    "partially": 0.28
+   },
+   "usage": {
+    "input_tokens": 1340,
+    "output_tokens": 65
+   },
+   "latency_s": 0.32
+  },
+  {
+   "id": "T08",
+   "t": "00:51",
+   "speaker": "PT",
+   "text": "Five, maybe six. It's pretty much every night.",
+   "capture": "omitted",
+   "confidence": 0.84,
+   "probs": {
+    "partially": 0.08,
+    "omitted": 0.84,
+    "contradicted": 0.07,
+    "not_clinical": 0.0,
+    "captured": 0.01
+   },
+   "usage": {
+    "input_tokens": 1319,
+    "output_tokens": 63
+   },
+   "latency_s": 0.28
+  },
+  {
+   "id": "T09",
+   "t": "00:55",
+   "speaker": "DR",
+   "text": "Are you taking anything to help with sleep?",
+   "capture": "not_clinical",
+   "confidence": 0.68,
+   "probs": {
+    "omitted": 0.23,
+    "captured": 0.01,
+    "contradicted": 0.01,
+    "partially": 0.06,
+    "not_clinical": 0.68
+   },
+   "usage": {
+    "input_tokens": 1313,
+    "output_tokens": 65
+   },
+   "latency_s": 0.31
+  },
+  {
+   "id": "T10",
+   "t": "00:58",
+   "speaker": "PT",
+   "text": "My primary care doctor gave me trazodone, fifty milligrams, back in July. I take it maybe two or three nights a week when it's really bad.",
+   "capture": "partially",
+   "confidence": 0.63,
+   "probs": {
+    "partially": 0.63,
+    "captured": 0.23,
+    "contradicted": 0.06,
+    "not_clinical": 0.0,
+    "omitted": 0.08
+   },
+   "usage": {
+    "input_tokens": 1336,
+    "output_tokens": 64
+   },
+   "latency_s": 0.41
+  },
+  {
+   "id": "T11",
+   "t": "01:09",
+   "speaker": "DR",
+   "text": "Good to know, I'll add that to your list. Does it help?",
+   "capture": "partially",
+   "confidence": 0.55,
+   "probs": {
+    "captured": 0.1,
+    "not_clinical": 0.07,
+    "omitted": 0.19,
+    "contradicted": 0.08,
+    "partially": 0.55
+   },
+   "usage": {
+    "input_tokens": 1343,
+    "output_tokens": 64
+   },
+   "latency_s": 0.32
+  },
+  {
+   "id": "T12",
+   "t": "01:13",
+   "speaker": "PT",
+   "text": "It knocks me out, but I feel groggy the next morning so I don't love taking it.",
+   "capture": "omitted",
+   "confidence": 0.63,
+   "probs": {
+    "omitted": 0.63,
+    "not_clinical": 0.01,
+    "captured": 0.07,
+    "partially": 0.07,
+    "contradicted": 0.22
+   },
+   "usage": {
+    "input_tokens": 1329,
+    "output_tokens": 63
+   },
+   "latency_s": 0.33
+  },
+  {
+   "id": "T13",
+   "t": "01:19",
+   "speaker": "DR",
+   "text": "What about energy during the day?",
+   "capture": "not_clinical",
+   "confidence": 0.56,
+   "probs": {
+    "contradicted": 0.03,
+    "captured": 0.06,
+    "omitted": 0.17,
+    "not_clinical": 0.56,
+    "partially": 0.17
+   },
+   "usage": {
+    "input_tokens": 1320,
+    "output_tokens": 65
+   },
+   "latency_s": 0.29
+  },
+  {
+   "id": "T14",
+   "t": "01:22",
+   "speaker": "PT",
+   "text": "Still low. I get through work but I'm exhausted by two or three in the afternoon.",
+   "capture": "captured",
+   "confidence": 0.97,
+   "probs": {
+    "omitted": 0.0,
+    "contradicted": 0.0,
+    "partially": 0.03,
+    "captured": 0.97,
+    "not_clinical": 0.0
+   },
+   "usage": {
+    "input_tokens": 1318,
+    "output_tokens": 63
+   },
+   "latency_s": 0.36
+  },
+  {
+   "id": "T15",
+   "t": "01:29",
+   "speaker": "DR",
+   "text": "And your ability to focus at work?",
+   "capture": "not_clinical",
+   "confidence": 0.67,
+   "probs": {
+    "omitted": 0.02,
+    "captured": 0.27,
+    "contradicted": 0.0,
+    "partially": 0.04,
+    "not_clinical": 0.67
+   },
+   "usage": {
+    "input_tokens": 1319,
+    "output_tokens": 65
+   },
+   "latency_s": 0.34
+  },
+  {
+   "id": "T16",
+   "t": "01:32",
+   "speaker": "PT",
+   "text": "That's actually improved. I'm getting through my inbox again. My manager noticed, which was nice.",
+   "capture": "captured",
+   "confidence": 0.95,
+   "probs": {
+    "omitted": 0.0,
+    "not_clinical": 0.0,
+    "contradicted": 0.0,
+    "captured": 0.95,
+    "partially": 0.05
+   },
+   "usage": {
+    "input_tokens": 1321,
+    "output_tokens": 63
+   },
+   "latency_s": 0.35
+  },
+  {
+   "id": "T17",
+   "t": "01:40",
+   "speaker": "DR",
+   "text": "Are you still enjoying things? Last time you said you'd stopped painting.",
+   "capture": "captured",
+   "confidence": 0.57,
+   "probs": {
+    "partially": 0.13,
+    "contradicted": 0.01,
+    "captured": 0.57,
+    "omitted": 0.02,
+    "not_clinical": 0.27
+   },
+   "usage": {
+    "input_tokens": 1328,
+    "output_tokens": 63
+   },
+   "latency_s": 0.3
+  },
+  {
+   "id": "T18",
+   "t": "01:45",
+   "speaker": "PT",
+   "text": "I picked up a brush once. Didn't finish anything. I'm not really excited about it yet, but I didn't hate it.",
+   "capture": "contradicted",
+   "confidence": 0.74,
+   "probs": {
+    "partially": 0.23,
+    "captured": 0.02,
+    "contradicted": 0.74,
+    "not_clinical": 0.0,
+    "omitted": 0.01
+   },
+   "usage": {
+    "input_tokens": 1335,
+    "output_tokens": 65
+   },
+   "latency_s": 0.34
+  },
+  {
+   "id": "T19",
+   "t": "01:54",
+   "speaker": "DR",
+   "text": "That's a start. Anything going on at work or at home that's been weighing on you?",
+   "capture": "not_clinical",
+   "confidence": 0.4,
+   "probs": {
+    "omitted": 0.02,
+    "partially": 0.26,
+    "contradicted": 0.25,
+    "captured": 0.07,
+    "not_clinical": 0.4
+   },
+   "usage": {
+    "input_tokens": 1340,
+    "output_tokens": 65
+   },
+   "latency_s": 0.33
+  },
+  {
+   "id": "T20",
+   "t": "02:00",
+   "speaker": "PT",
+   "text": "My grandmother passed away three weeks ago. She basically raised me. I went to the funeral in Ohio and I've kind of been in a fog since.",
+   "capture": "captured",
+   "confidence": 0.64,
+   "probs": {
+    "omitted": 0.0,
+    "not_clinical": 0.0,
+    "contradicted": 0.0,
+    "captured": 0.64,
+    "partially": 0.36
+   },
+   "usage": {
+    "input_tokens": 1343,
+    "output_tokens": 63
+   },
+   "latency_s": 0.29
+  },
+  {
+   "id": "T21",
+   "t": "02:12",
+   "speaker": "DR",
+   "text": "I'm so sorry, Maya. That's a huge loss, especially with everything else you've been carrying. How has the grief been sitting with the depression?",
+   "capture": "captured",
+   "confidence": 0.48,
+   "probs": {
+    "contradicted": 0.0,
+    "captured": 0.48,
+    "not_clinical": 0.3,
+    "partially": 0.21,
+    "omitted": 0.01
+   },
+   "usage": {
+    "input_tokens": 1355,
+    "output_tokens": 63
+   },
+   "latency_s": 0.32
+  },
+  {
+   "id": "T22",
+   "t": "02:22",
+   "speaker": "PT",
+   "text": "It's hard to separate them. Some days it's sadness about her, some days it's just the same heaviness as before.",
+   "capture": "omitted",
+   "confidence": 0.52,
+   "probs": {
+    "captured": 0.07,
+    "not_clinical": 0.0,
+    "omitted": 0.52,
+    "partially": 0.41,
+    "contradicted": 0.0
+   },
+   "usage": {
+    "input_tokens": 1352,
+    "output_tokens": 63
+   },
+   "latency_s": 0.31
+  },
+  {
+   "id": "T23",
+   "t": "02:31",
+   "speaker": "DR",
+   "text": "Did you miss any work around that?",
+   "capture": "not_clinical",
+   "confidence": 0.47,
+   "probs": {
+    "partially": 0.25,
+    "not_clinical": 0.47,
+    "contradicted": 0.0,
+    "captured": 0.18,
+    "omitted": 0.1
+   },
+   "usage": {
+    "input_tokens": 1328,
+    "output_tokens": 65
+   },
+   "latency_s": 0.32
+  },
+  {
+   "id": "T24",
+   "t": "02:33",
+   "speaker": "PT",
+   "text": "Three days for the funeral. My manager was understanding.",
+   "capture": "contradicted",
+   "confidence": 0.65,
+   "probs": {
+    "partially": 0.24,
+    "not_clinical": 0.0,
+    "captured": 0.11,
+    "contradicted": 0.65,
+    "omitted": 0.0
+   },
+   "usage": {
+    "input_tokens": 1311,
+    "output_tokens": 65
+   },
+   "latency_s": 0.33
+  },
+  {
+   "id": "T25",
+   "t": "02:38",
+   "speaker": "DR",
+   "text": "Let's talk about the anxiety. You were having panic attacks a couple of times a week in the spring.",
+   "capture": "not_clinical",
+   "confidence": 0.59,
+   "probs": {
+    "omitted": 0.06,
+    "captured": 0.13,
+    "not_clinical": 0.59,
+    "contradicted": 0.01,
+    "partially": 0.21
+   },
+   "usage": {
+    "input_tokens": 1325,
+    "output_tokens": 65
+   },
+   "latency_s": 0.29
+  },
+  {
+   "id": "T26",
+   "t": "02:44",
+   "speaker": "PT",
+   "text": "I've only had one in the last month, and it was mild. Mostly I just get the tightness in my chest when I think about deadlines.",
+   "capture": "contradicted",
+   "confidence": 0.57,
+   "probs": {
+    "captured": 0.06,
+    "omitted": 0.05,
+    "partially": 0.32,
+    "contradicted": 0.57,
+    "not_clinical": 0.0
+   },
+   "usage": {
+    "input_tokens": 1346,
+    "output_tokens": 65
+   },
+   "latency_s": 0.31
+  },
+  {
+   "id": "T27",
+   "t": "02:54",
+   "speaker": "DR",
+   "text": "And the worry itself, the constant background worry?",
+   "capture": "partially",
+   "confidence": 0.46,
+   "probs": {
+    "partially": 0.46,
+    "contradicted": 0.01,
+    "omitted": 0.08,
+    "captured": 0.12,
+    "not_clinical": 0.33
+   },
+   "usage": {
+    "input_tokens": 1334,
+    "output_tokens": 64
+   },
+   "latency_s": 0.34
+  },
+  {
+   "id": "T28",
+   "t": "02:58",
+   "speaker": "PT",
+   "text": "Still there, but it's quieter. Like the volume is turned down.",
+   "capture": "captured",
+   "confidence": 0.97,
+   "probs": {
+    "partially": 0.03,
+    "captured": 0.97,
+    "omitted": 0.0,
+    "not_clinical": 0.0,
+    "contradicted": 0.0
+   },
+   "usage": {
+    "input_tokens": 1317,
+    "output_tokens": 63
+   },
+   "latency_s": 0.3
+  },
+  {
+   "id": "T29",
+   "t": "03:04",
+   "speaker": "DR",
+   "text": "How about alcohol these days?",
+   "capture": "not_clinical",
+   "confidence": 0.93,
+   "probs": {
+    "partially": 0.01,
+    "captured": 0.03,
+    "contradicted": 0.0,
+    "omitted": 0.03,
+    "not_clinical": 0.93
+   },
+   "usage": {
+    "input_tokens": 1313,
+    "output_tokens": 65
+   },
+   "latency_s": 0.41
+  },
+  {
+   "id": "T30",
+   "t": "03:07",
+   "speaker": "PT",
+   "text": "Weekends mostly. Three, maybe four beers on a Friday and Saturday night. Nothing during the week.",
+   "capture": "contradicted",
+   "confidence": 1.0,
+   "probs": {
+    "not_clinical": 0.0,
+    "captured": 0.0,
+    "partially": 0.0,
+    "omitted": 0.0,
+    "contradicted": 1.0
+   },
+   "usage": {
+    "input_tokens": 1320,
+    "output_tokens": 65
+   },
+   "latency_s": 0.32
+  },
+  {
+   "id": "T31",
+   "t": "03:15",
+   "speaker": "DR",
+   "text": "Has that changed from before?",
+   "capture": "contradicted",
+   "confidence": 0.78,
+   "probs": {
+    "omitted": 0.08,
+    "not_clinical": 0.11,
+    "contradicted": 0.78,
+    "partially": 0.03,
+    "captured": 0.0
+   },
+   "usage": {
+    "input_tokens": 1320,
+    "output_tokens": 65
+   },
+   "latency_s": 0.35
+  },
+  {
+   "id": "T32",
+   "t": "03:17",
+   "speaker": "PT",
+   "text": "It's about the same. Maybe a little more since Grandma died.",
+   "capture": "partially",
+   "confidence": 0.46,
+   "probs": {
+    "partially": 0.46,
+    "captured": 0.32,
+    "contradicted": 0.08,
+    "not_clinical": 0.01,
+    "omitted": 0.13
+   },
+   "usage": {
+    "input_tokens": 1312,
+    "output_tokens": 64
+   },
+   "latency_s": 0.33
+  },
+  {
+   "id": "T33",
+   "t": "03:22",
+   "speaker": "DR",
+   "text": "Any cannabis, or anything else?",
+   "capture": "not_clinical",
+   "confidence": 0.64,
+   "probs": {
+    "omitted": 0.04,
+    "captured": 0.2,
+    "partially": 0.1,
+    "not_clinical": 0.64,
+    "contradicted": 0.02
+   },
+   "usage": {
+    "input_tokens": 1313,
+    "output_tokens": 65
+   },
+   "latency_s": 0.35
+  },
+  {
+   "id": "T34",
+   "t": "03:24",
+   "speaker": "PT",
+   "text": "I'll take a THC gummy once in a while to sleep, maybe once every couple of weeks. No other drugs.",
+   "capture": "contradicted",
+   "confidence": 1.0,
+   "probs": {
+    "not_clinical": 0.0,
+    "captured": 0.0,
+    "omitted": 0.0,
+    "partially": 0.0,
+    "contradicted": 1.0
+   },
+   "usage": {
+    "input_tokens": 1324,
+    "output_tokens": 65
+   },
+   "latency_s": 0.35
+  },
+  {
+   "id": "T35",
+   "t": "03:32",
+   "speaker": "DR",
+   "text": "Okay. And caffeine?",
+   "capture": "contradicted",
+   "confidence": 0.59,
+   "probs": {
+    "partially": 0.03,
+    "captured": 0.01,
+    "omitted": 0.03,
+    "not_clinical": 0.34,
+    "contradicted": 0.59
+   },
+   "usage": {
+    "input_tokens": 1322,
+    "output_tokens": 65
+   },
+   "latency_s": 0.36
+  },
+  {
+   "id": "T36",
+   "t": "03:34",
+   "speaker": "PT",
+   "text": "Two coffees in the morning. Sometimes an energy drink in the afternoon, which I know isn't helping the sleep.",
+   "capture": "captured",
+   "confidence": 0.61,
+   "probs": {
+    "captured": 0.61,
+    "partially": 0.39,
+    "not_clinical": 0.0,
+    "contradicted": 0.0,
+    "omitted": 0.0
+   },
+   "usage": {
+    "input_tokens": 1322,
+    "output_tokens": 63
+   },
+   "latency_s": 0.37
+  },
+  {
+   "id": "T37",
+   "t": "03:42",
+   "speaker": "DR",
+   "text": "I need to ask the harder questions. Have you had any thoughts of hurting yourself or that you'd be better off dead?",
+   "capture": "captured",
+   "confidence": 0.51,
+   "probs": {
+    "omitted": 0.03,
+    "contradicted": 0.0,
+    "not_clinical": 0.3,
+    "partially": 0.16,
+    "captured": 0.51
+   },
+   "usage": {
+    "input_tokens": 1342,
+    "output_tokens": 63
+   },
+   "latency_s": 0.29
+  },
+  {
+   "id": "T38",
+   "t": "03:50",
+   "speaker": "PT",
+   "text": "Not like planning anything. Sometimes I think it'd be easier to just not wake up. But I wouldn't do anything. I have my kids.",
+   "capture": "contradicted",
+   "confidence": 0.83,
+   "probs": {
+    "partially": 0.11,
+    "contradicted": 0.83,
+    "not_clinical": 0.0,
+    "omitted": 0.05,
+    "captured": 0.01
+   },
+   "usage": {
+    "input_tokens": 1347,
+    "output_tokens": 65
+   },
+   "latency_s": 0.31
+  },
+  {
+   "id": "T39",
+   "t": "04:00",
+   "speaker": "DR",
+   "text": "Thank you for being honest. Have those thoughts been more or less frequent than when we first met?",
+   "capture": "contradicted",
+   "confidence": 0.64,
+   "probs": {
+    "omitted": 0.16,
+    "captured": 0.02,
+    "not_clinical": 0.06,
+    "contradicted": 0.64,
+    "partially": 0.12
+   },
+   "usage": {
+    "input_tokens": 1342,
+    "output_tokens": 65
+   },
+   "latency_s": 0.32
+  },
+  {
+   "id": "T40",
+   "t": "04:06",
+   "speaker": "PT",
+   "text": "Less. It was almost every day before. Now it's maybe once a week, usually late at night.",
+   "capture": "contradicted",
+   "confidence": 0.63,
+   "probs": {
+    "contradicted": 0.63,
+    "not_clinical": 0.0,
+    "omitted": 0.29,
+    "captured": 0.02,
+    "partially": 0.06
+   },
+   "usage": {
+    "input_tokens": 1334,
+    "output_tokens": 65
+   },
+   "latency_s": 0.3
+  },
+  {
+   "id": "T41",
+   "t": "04:13",
+   "speaker": "DR",
+   "text": "Any thoughts of hurting anyone else?",
+   "capture": "not_clinical",
+   "confidence": 0.47,
+   "probs": {
+    "contradicted": 0.02,
+    "captured": 0.1,
+    "not_clinical": 0.47,
+    "omitted": 0.29,
+    "partially": 0.12
+   },
+   "usage": {
+    "input_tokens": 1321,
+    "output_tokens": 65
+   },
+   "latency_s": 0.33
+  },
+  {
+   "id": "T42",
+   "t": "04:15",
+   "speaker": "PT",
+   "text": "No, never.",
+   "capture": "captured",
+   "confidence": 0.96,
+   "probs": {
+    "captured": 0.96,
+    "contradicted": 0.0,
+    "partially": 0.02,
+    "not_clinical": 0.01,
+    "omitted": 0.01
+   },
+   "usage": {
+    "input_tokens": 1303,
+    "output_tokens": 63
+   },
+   "latency_s": 0.31
+  },
+  {
+   "id": "T43",
+   "t": "04:17",
+   "speaker": "DR",
+   "text": "Do you have access to any firearms at home?",
+   "capture": "not_clinical",
+   "confidence": 0.51,
+   "probs": {
+    "captured": 0.21,
+    "omitted": 0.07,
+    "partially": 0.17,
+    "contradicted": 0.04,
+    "not_clinical": 0.51
+   },
+   "usage": {
+    "input_tokens": 1306,
+    "output_tokens": 65
+   },
+   "latency_s": 0.31
+  },
+  {
+   "id": "T44",
+   "t": "04:20",
+   "speaker": "PT",
+   "text": "My husband keeps a handgun in the nightstand. It's his, but it's not locked up or anything.",
+   "capture": "partially",
+   "confidence": 0.49,
+   "probs": {
+    "contradicted": 0.33,
+    "partially": 0.49,
+    "captured": 0.1,
+    "not_clinical": 0.0,
+    "omitted": 0.08
+   },
+   "usage": {
+    "input_tokens": 1326,
+    "output_tokens": 64
+   },
+   "latency_s": 0.29
+  },
+  {
+   "id": "T45",
+   "t": "04:27",
+   "speaker": "DR",
+   "text": "I'd like us to talk about that. When someone is having the kind of thoughts you described, even without a plan, having a gun that accessible raises the risk. Would you be willing to ask him to lock it in a safe or store it somewhere else for now?",
+   "capture": "partially",
+   "confidence": 0.58,
+   "probs": {
+    "captured": 0.29,
+    "omitted": 0.04,
+    "contradicted": 0.06,
+    "partially": 0.58,
+    "not_clinical": 0.03
+   },
+   "usage": {
+    "input_tokens": 1371,
+    "output_tokens": 64
+   },
+   "latency_s": 0.29
+  },
+  {
+   "id": "T46",
+   "t": "04:43",
+   "speaker": "PT",
+   "text": "I can talk to him. He'd probably be okay with a safe. I don't want to promise he'll move it out of the house.",
+   "capture": "contradicted",
+   "confidence": 0.51,
+   "probs": {
+    "contradicted": 0.51,
+    "captured": 0.06,
+    "omitted": 0.02,
+    "not_clinical": 0.0,
+    "partially": 0.41
+   },
+   "usage": {
+    "input_tokens": 1377,
+    "output_tokens": 65
+   },
+   "latency_s": 0.33
+  },
+  {
+   "id": "T47",
+   "t": "04:50",
+   "speaker": "DR",
+   "text": "That's fair. Let's have that conversation and check back next visit. Now, how have you tolerated the sertraline? Any side effects?",
+   "capture": "partially",
+   "confidence": 0.48,
+   "probs": {
+    "captured": 0.17,
+    "partially": 0.48,
+    "contradicted": 0.11,
+    "not_clinical": 0.17,
+    "omitted": 0.07
+   },
+   "usage": {
+    "input_tokens": 1352,
+    "output_tokens": 64
+   },
+   "latency_s": 0.36
+  },
+  {
+   "id": "T48",
+   "t": "04:59",
+   "speaker": "PT",
+   "text": "The first two weeks I was nauseous every morning, but that went away. The thing that's still bothering me is my sex drive is basically gone. My husband's been patient about it, but it's frustrating.",
+   "capture": "contradicted",
+   "confidence": 0.68,
+   "probs": {
+    "captured": 0.03,
+    "contradicted": 0.68,
+    "not_clinical": 0.0,
+    "omitted": 0.12,
+    "partially": 0.17
+   },
+   "usage": {
+    "input_tokens": 1367,
+    "output_tokens": 65
+   },
+   "latency_s": 0.29
+  },
+  {
+   "id": "T49",
+   "t": "05:13",
+   "speaker": "DR",
+   "text": "That's a common one and it's worth taking seriously. We can talk about options. Any headaches, jitteriness, GI issues now?",
+   "capture": "omitted",
+   "confidence": 0.42,
+   "probs": {
+    "partially": 0.2,
+    "not_clinical": 0.02,
+    "captured": 0.16,
+    "contradicted": 0.2,
+    "omitted": 0.42
+   },
+   "usage": {
+    "input_tokens": 1366,
+    "output_tokens": 63
+   },
+   "latency_s": 0.32
+  },
+  {
+   "id": "T50",
+   "t": "05:20",
+   "speaker": "PT",
+   "text": "No, none of that anymore.",
+   "capture": "captured",
+   "confidence": 0.89,
+   "probs": {
+    "contradicted": 0.01,
+    "not_clinical": 0.01,
+    "omitted": 0.02,
+    "captured": 0.89,
+    "partially": 0.07
+   },
+   "usage": {
+    "input_tokens": 1328,
+    "output_tokens": 63
+   },
+   "latency_s": 0.38
+  },
+  {
+   "id": "T51",
+   "t": "05:23",
+   "speaker": "DR",
+   "text": "Are you taking it every day?",
+   "capture": "not_clinical",
+   "confidence": 0.63,
+   "probs": {
+    "partially": 0.06,
+    "contradicted": 0.03,
+    "omitted": 0.06,
+    "captured": 0.22,
+    "not_clinical": 0.63
+   },
+   "usage": {
+    "input_tokens": 1306,
+    "output_tokens": 65
+   },
+   "latency_s": 0.3
+  },
+  {
+   "id": "T52",
+   "t": "05:25",
+   "speaker": "PT",
+   "text": "Every morning with breakfast. I've missed maybe two doses total.",
+   "capture": "captured",
+   "confidence": 0.96,
+   "probs": {
+    "captured": 0.96,
+    "contradicted": 0.01,
+    "not_clinical": 0.0,
+    "partially": 0.03,
+    "omitted": 0.0
+   },
+   "usage": {
+    "input_tokens": 1312,
+    "output_tokens": 63
+   },
+   "latency_s": 0.32
+  },
+  {
+   "id": "T53",
+   "t": "05:30",
+   "speaker": "DR",
+   "text": "Great. And you're still on the fifty milligram dose?",
+   "capture": "contradicted",
+   "confidence": 0.54,
+   "probs": {
+    "omitted": 0.02,
+    "partially": 0.14,
+    "contradicted": 0.54,
+    "captured": 0.17,
+    "not_clinical": 0.13
+   },
+   "usage": {
+    "input_tokens": 1319,
+    "output_tokens": 65
+   },
+   "latency_s": 0.31
+  },
+  {
+   "id": "T54",
+   "t": "05:33",
+   "speaker": "PT",
+   "text": "Yes, fifty.",
+   "capture": "contradicted",
+   "confidence": 0.97,
+   "probs": {
+    "partially": 0.01,
+    "captured": 0.01,
+    "not_clinical": 0.0,
+    "omitted": 0.01,
+    "contradicted": 0.97
+   },
+   "usage": {
+    "input_tokens": 1310,
+    "output_tokens": 65
+   },
+   "latency_s": 0.29
+  },
+  {
+   "id": "T55",
+   "t": "05:35",
+   "speaker": "DR",
+   "text": "Did you get connected with the therapist we referred you to?",
+   "capture": "not_clinical",
+   "confidence": 0.77,
+   "probs": {
+    "captured": 0.02,
+    "not_clinical": 0.77,
+    "contradicted": 0.0,
+    "omitted": 0.15,
+    "partially": 0.06
+   },
+   "usage": {
+    "input_tokens": 1308,
+    "output_tokens": 65
+   },
+   "latency_s": 0.38
+  },
+  {
+   "id": "T56",
+   "t": "05:38",
+   "speaker": "PT",
+   "text": "I called. They put me on a waitlist. They said probably six to eight weeks before I could get an intake.",
+   "capture": "omitted",
+   "confidence": 0.52,
+   "probs": {
+    "not_clinical": 0.0,
+    "partially": 0.06,
+    "captured": 0.02,
+    "omitted": 0.52,
+    "contradicted": 0.4
+   },
+   "usage": {
+    "input_tokens": 1330,
+    "output_tokens": 63
+   },
+   "latency_s": 0.31
+  },
+  {
+   "id": "T57",
+   "t": "05:46",
+   "speaker": "DR",
+   "text": "Okay, let's see if we can find something faster. Any plans for pregnancy in the next year? I ask because it changes how we think about medications.",
+   "capture": "not_clinical",
+   "confidence": 0.53,
+   "probs": {
+    "contradicted": 0.01,
+    "omitted": 0.13,
+    "captured": 0.2,
+    "partially": 0.13,
+    "not_clinical": 0.53
+   },
+   "usage": {
+    "input_tokens": 1350,
+    "output_tokens": 65
+   },
+   "latency_s": 0.32
+  },
+  {
+   "id": "T58",
+   "t": "05:54",
+   "speaker": "PT",
+   "text": "No, we're done. I'm on the pill.",
+   "capture": "captured",
+   "confidence": 0.96,
+   "probs": {
+    "partially": 0.04,
+    "captured": 0.96,
+    "omitted": 0.0,
+    "not_clinical": 0.0,
+    "contradicted": 0.0
+   },
+   "usage": {
+    "input_tokens": 1336,
+    "output_tokens": 63
+   },
+   "latency_s": 0.48
+  },
+  {
+   "id": "T59",
+   "t": "05:57",
+   "speaker": "DR",
+   "text": "Your PHQ-9 from today came back at fourteen, which is down from nineteen at your first visit. So that lines up with what you're describing. Partial response.",
+   "capture": "captured",
+   "confidence": 0.95,
+   "probs": {
+    "partially": 0.01,
+    "not_clinical": 0.02,
+    "captured": 0.95,
+    "contradicted": 0.01,
+    "omitted": 0.01
+   },
+   "usage": {
+    "input_tokens": 1339,
+    "output_tokens": 63
+   },
+   "latency_s": 0.29
+  },
+  {
+   "id": "T60",
+   "t": "06:08",
+   "speaker": "PT",
+   "text": "That sounds right.",
+   "capture": "not_clinical",
+   "confidence": 0.96,
+   "probs": {
+    "partially": 0.0,
+    "not_clinical": 0.96,
+    "contradicted": 0.0,
+    "captured": 0.04,
+    "omitted": 0.0
+   },
+   "usage": {
+    "input_tokens": 1331,
+    "output_tokens": 65
+   },
+   "latency_s": 0.29
+  },
+  {
+   "id": "T61",
+   "t": "06:10",
+   "speaker": "DR",
+   "text": "Here's what I'm thinking. The sertraline is helping but you're only partway there. I'd like to increase it to one hundred milligrams. The nausea usually doesn't come back with the increase, but it can, and I want you to call me if it does.",
+   "capture": "partially",
+   "confidence": 0.61,
+   "probs": {
+    "not_clinical": 0.0,
+    "omitted": 0.09,
+    "captured": 0.1,
+    "partially": 0.61,
+    "contradicted": 0.2
+   },
+   "usage": {
+    "input_tokens": 1356,
+    "output_tokens": 64
+   },
+   "latency_s": 0.29
+  },
+  {
+   "id": "T62",
+   "t": "06:25",
+   "speaker": "PT",
+   "text": "Okay. What about the sex drive thing? Will more make that worse?",
+   "capture": "omitted",
+   "confidence": 0.43,
+   "probs": {
+    "partially": 0.3,
+    "captured": 0.13,
+    "omitted": 0.43,
+    "not_clinical": 0.02,
+    "contradicted": 0.12
+   },
+   "usage": {
+    "input_tokens": 1367,
+    "output_tokens": 63
+   },
+   "latency_s": 0.29
+  },
+  {
+   "id": "T63",
+   "t": "06:30",
+   "speaker": "DR",
+   "text": "It might. Let's give the hundred milligrams four weeks. If the libido issue is still a problem then, we can talk about adding bupropion or switching. I don't want to change two things at once.",
+   "capture": "partially",
+   "confidence": 0.53,
+   "probs": {
+    "captured": 0.09,
+    "not_clinical": 0.0,
+    "partially": 0.53,
+    "omitted": 0.04,
+    "contradicted": 0.34
+   },
+   "usage": {
+    "input_tokens": 1354,
+    "output_tokens": 64
+   },
+   "latency_s": 0.33
+  },
+  {
+   "id": "T64",
+   "t": "06:43",
+   "speaker": "PT",
+   "text": "That makes sense.",
+   "capture": "partially",
+   "confidence": 0.37,
+   "probs": {
+    "partially": 0.37,
+    "captured": 0.04,
+    "contradicted": 0.26,
+    "not_clinical": 0.31,
+    "omitted": 0.02
+   },
+   "usage": {
+    "input_tokens": 1343,
+    "output_tokens": 64
+   },
+   "latency_s": 0.28
+  },
+  {
+   "id": "T65",
+   "t": "06:45",
+   "speaker": "DR",
+   "text": "For sleep, cut the afternoon energy drink and keep the trazodone for the rough nights. I'd rather not add a third medication right now.",
+   "capture": "contradicted",
+   "confidence": 0.77,
+   "probs": {
+    "captured": 0.02,
+    "omitted": 0.03,
+    "partially": 0.18,
+    "contradicted": 0.77,
+    "not_clinical": 0.0
+   },
+   "usage": {
+    "input_tokens": 1326,
+    "output_tokens": 65
+   },
+   "latency_s": 0.31
+  },
+  {
+   "id": "T66",
+   "t": "06:54",
+   "speaker": "PT",
+   "text": "Okay.",
+   "capture": "contradicted",
+   "confidence": 0.48,
+   "probs": {
+    "omitted": 0.03,
+    "partially": 0.16,
+    "captured": 0.02,
+    "contradicted": 0.48,
+    "not_clinical": 0.31
+   },
+   "usage": {
+    "input_tokens": 1324,
+    "output_tokens": 65
+   },
+   "latency_s": 0.3
+  },
+  {
+   "id": "T67",
+   "t": "06:55",
+   "speaker": "DR",
+   "text": "Given the thoughts you mentioned, I want to put together a safety plan with you before you leave. And I'll give you the 988 number to save in your phone. Can we do that?",
+   "capture": "captured",
+   "confidence": 0.65,
+   "probs": {
+    "not_clinical": 0.14,
+    "omitted": 0.04,
+    "captured": 0.65,
+    "partially": 0.16,
+    "contradicted": 0.01
+   },
+   "usage": {
+    "input_tokens": 1336,
+    "output_tokens": 63
+   },
+   "latency_s": 0.32
+  },
+  {
+   "id": "T68",
+   "t": "07:06",
+   "speaker": "PT",
+   "text": "Yeah, that's fine.",
+   "capture": "not_clinical",
+   "confidence": 0.49,
+   "probs": {
+    "partially": 0.06,
+    "captured": 0.44,
+    "omitted": 0.01,
+    "not_clinical": 0.49,
+    "contradicted": 0.0
+   },
+   "usage": {
+    "input_tokens": 1340,
+    "output_tokens": 65
+   },
+   "latency_s": 0.28
+  },
+  {
+   "id": "T69",
+   "t": "07:08",
+   "speaker": "DR",
+   "text": "Also, the loss of your grandmother, I think grief support would help. There's a group through the hospital that meets Tuesday evenings. I'll put the information in your after-visit summary.",
+   "capture": "captured",
+   "confidence": 0.71,
+   "probs": {
+    "partially": 0.29,
+    "captured": 0.71,
+    "omitted": 0.0,
+    "not_clinical": 0.0,
+    "contradicted": 0.0
+   },
+   "usage": {
+    "input_tokens": 1338,
+    "output_tokens": 63
+   },
+   "latency_s": 0.29
+  },
+  {
+   "id": "T70",
+   "t": "07:19",
+   "speaker": "PT",
+   "text": "I'd be open to that.",
+   "capture": "captured",
+   "confidence": 0.57,
+   "probs": {
+    "partially": 0.24,
+    "not_clinical": 0.14,
+    "contradicted": 0.0,
+    "captured": 0.57,
+    "omitted": 0.05
+   },
+   "usage": {
+    "input_tokens": 1339,
+    "output_tokens": 63
+   },
+   "latency_s": 0.3
+  },
+  {
+   "id": "T71",
+   "t": "07:21",
+   "speaker": "DR",
+   "text": "Let's plan on seeing each other again in four weeks. Sooner if the thoughts get worse or if you have any trouble with the higher dose.",
+   "capture": "contradicted",
+   "confidence": 0.68,
+   "probs": {
+    "partially": 0.22,
+    "not_clinical": 0.0,
+    "captured": 0.04,
+    "contradicted": 0.68,
+    "omitted": 0.06
+   },
+   "usage": {
+    "input_tokens": 1329,
+    "output_tokens": 65
+   },
+   "latency_s": 0.31
+  },
+  {
+   "id": "T72",
+   "t": "07:31",
+   "speaker": "PT",
+   "text": "Four weeks. Okay.",
+   "capture": "contradicted",
+   "confidence": 0.43,
+   "probs": {
+    "not_clinical": 0.34,
+    "omitted": 0.02,
+    "captured": 0.07,
+    "partially": 0.14,
+    "contradicted": 0.43
+   },
+   "usage": {
+    "input_tokens": 1327,
+    "output_tokens": 65
+   },
+   "latency_s": 0.41
+  },
+  {
+   "id": "T73",
+   "t": "07:33",
+   "speaker": "DR",
+   "text": "Anything else on your mind today?",
+   "capture": "not_clinical",
+   "confidence": 0.99,
+   "probs": {
+    "not_clinical": 0.99,
+    "contradicted": 0.01,
+    "captured": 0.0,
+    "partially": 0.0,
+    "omitted": 0.0
+   },
+   "usage": {
+    "input_tokens": 1304,
+    "output_tokens": 65
+   },
+   "latency_s": 0.32
+  },
+  {
+   "id": "T74",
+   "t": "07:35",
+   "speaker": "PT",
+   "text": "No, I think that's everything. Thank you.",
+   "capture": "not_clinical",
+   "confidence": 0.98,
+   "probs": {
+    "captured": 0.01,
+    "not_clinical": 0.98,
+    "contradicted": 0.0,
+    "omitted": 0.01,
+    "partially": 0.0
+   },
+   "usage": {
+    "input_tokens": 1310,
+    "output_tokens": 65
+   },
+   "latency_s": 0.29
+  }
+ ]
+}

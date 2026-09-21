@@ -1,0 +1,275 @@
+<title>Scribe Verify</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --ground:#F4F6F4; --surface:#FFFFFF; --surface2:#EDF1EE; --ink:#1E2A32; --muted:#5F6E78; --rule:#D9E0DD; --accent:#2F5D8A; --accent-ink:#FFFFFF;
+  --sup:#2A7A5A; --sup-bg:#E3F3EA; --con:#B8322F; --con-bg:#FBE4E2; --nf:#7A4DB0; --nf-bg:#EEE6F8; --amb:#B8720E; --amb-bg:#FCEFD8; --obs:#7C8790; --obs-bg:#ECEFF1;
+  --om:#B8322F; --par:#B8720E; --focus:#2F5D8A;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif; --sans:"IBM Plex Sans",-apple-system,"Segoe UI",Helvetica,Arial,sans-serif; --mono:"IBM Plex Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#141A1E; --surface:#1C242A; --surface2:#232D34; --ink:#E6ECEA; --muted:#9AA7AE; --rule:#2E3A42; --accent:#8AB4E0; --accent-ink:#0F1A24;
+  --sup:#6FCB9E; --sup-bg:#1B3A2E; --con:#F0847E; --con-bg:#47211F; --nf:#C3A2EE; --nf-bg:#332648; --amb:#F0B45C; --amb-bg:#453314; --obs:#98A5AD; --obs-bg:#2A343B;
+  --om:#F0847E; --par:#F0B45C; --focus:#8AB4E0;}}
+:root[data-theme="dark"]{
+  --ground:#141A1E; --surface:#1C242A; --surface2:#232D34; --ink:#E6ECEA; --muted:#9AA7AE; --rule:#2E3A42; --accent:#8AB4E0; --accent-ink:#0F1A24;
+  --sup:#6FCB9E; --sup-bg:#1B3A2E; --con:#F0847E; --con-bg:#47211F; --nf:#C3A2EE; --nf-bg:#332648; --amb:#F0B45C; --amb-bg:#453314; --obs:#98A5AD; --obs-bg:#2A343B;
+  --om:#F0847E; --par:#F0B45C; --focus:#8AB4E0;}
+html,body{height:100%}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.45;display:flex;flex-direction:column}
+*{box-sizing:border-box}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+button:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+/* header */
+header{padding:12px 16px 10px;border-bottom:1px solid var(--rule);background:var(--surface);display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center}
+.brand{display:flex;flex-direction:column;gap:2px;min-width:220px}
+.brand h1{margin:0;font:600 17px/1.2 var(--sans);letter-spacing:-.01em}
+.brand .meta{color:var(--muted);font-size:12.5px}
+.stats{display:flex;gap:6px;flex-wrap:wrap}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:4px 9px;border-radius:999px;border:1px solid var(--rule);font-size:12.5px;font-weight:500;background:var(--surface2);cursor:pointer}
+.chip .n{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.chip[data-on="1"]{outline:2px solid var(--focus);outline-offset:-1px}
+.dot{width:9px;height:9px;border-radius:50%;flex:none}
+.dot.supported{background:var(--sup)} .dot.contradicted{background:var(--con)} .dot.not_found{background:var(--nf)} .dot.ambiguous{background:var(--amb)} .dot.observation{background:var(--obs)}
+.dot.omitted{background:var(--om)} .dot.partially{background:var(--par)}
+.controls{display:flex;gap:14px;align-items:center;margin-left:auto;flex-wrap:wrap;font-size:12.5px;color:var(--muted)}
+.controls label{display:flex;gap:6px;align-items:center}
+.controls input[type=range]{width:110px;accent-color:var(--accent)}
+.toggle{padding:5px 10px;border:1px solid var(--rule);border-radius:6px;background:var(--surface2);color:var(--ink);font-weight:500}
+.toggle[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+/* panes */
+main{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr)}
+.pane{min-height:0;overflow-y:auto;padding:18px 20px 60px}
+.pane+.pane{border-left:1px solid var(--rule);background:var(--surface)}
+.pane h2{margin:0 0 4px;font:500 11.5px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.pane .sub{margin:0 0 16px;color:var(--muted);font-size:12.5px}
+/* draft */
+.note{font-family:var(--serif);font-size:16px;line-height:1.6;max-width:62ch}
+.note h3{font:600 12px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:20px 0 4px;padding-top:12px;border-top:1px solid var(--rule)}
+.note h3:first-child{border-top:0;margin-top:0;padding-top:0}
+.claim{border-radius:3px;padding:1px 2px;margin:0 -2px;cursor:pointer;transition:background .15s;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px;text-decoration-color:transparent}
+.claim:hover{background:var(--surface2)}
+body.colored .claim.supported{text-decoration-color:var(--sup)}
+body.colored .claim.contradicted{background:var(--con-bg);text-decoration-color:var(--con)}
+body.colored .claim.not_found{background:var(--nf-bg);text-decoration-color:var(--nf)}
+body.colored .claim.ambiguous{background:var(--amb-bg);text-decoration-color:var(--amb)}
+body.colored .claim.observation{text-decoration-color:var(--obs);text-decoration-style:dotted}
+body.colored .claim.review{text-decoration-style:dashed}
+.claim.active{outline:2px solid var(--focus);outline-offset:1px}
+.claim.dim{opacity:.35}
+.claim .cid{font:500 10px var(--mono);color:var(--muted);vertical-align:super;margin-left:2px;display:none}
+body.ids .claim .cid{display:inline}
+/* inspector card */
+.card{font-family:var(--sans);font-size:13px;background:var(--surface);border:1px solid var(--rule);border-left:4px solid var(--accent);border-radius:6px;padding:12px 14px;margin:10px 0 14px;display:grid;gap:8px}
+.card.supported{border-left-color:var(--sup)} .card.contradicted{border-left-color:var(--con)} .card.not_found{border-left-color:var(--nf)} .card.ambiguous{border-left-color:var(--amb)} .card.observation{border-left-color:var(--obs)}
+.card .q{color:var(--muted);font-style:italic}
+.verdict{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.verdict b{font-size:14px;text-transform:capitalize}
+.verdict .conf{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--muted)}
+.bars{display:grid;grid-template-columns:auto 1fr auto;gap:3px 8px;align-items:center;font-size:12px}
+.bars .lbl{color:var(--muted);text-transform:capitalize}
+.bars .bar{height:7px;background:var(--surface2);border-radius:4px;overflow:hidden}
+.bars .bar i{display:block;height:100%;border-radius:4px}
+.bars .pct{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--muted)}
+.src{padding:8px 10px;background:var(--surface2);border-radius:4px;display:grid;gap:3px}
+.src .who{font:500 11px var(--mono);color:var(--muted)}
+.src q{quotes:"\201C" "\201D";font-family:var(--serif);font-size:14px}
+.src.none{color:var(--muted);font-style:italic}
+.alts{color:var(--muted);font-size:12px}
+.alts code{font-family:var(--mono)}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+.actions button{padding:5px 10px;border:1px solid var(--rule);border-radius:5px;background:var(--surface2);font-weight:500;font-size:12.5px}
+.actions button.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+/* transcript */
+.turn{display:grid;grid-template-columns:44px 1fr;gap:4px 10px;padding:7px 8px;border-radius:6px;margin:0 -8px;border:1px solid transparent}
+.turn .t{font:500 11.5px var(--mono);color:var(--muted);padding-top:3px;font-variant-numeric:tabular-nums}
+.turn .who{font:600 11px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.turn.PT .who{color:var(--accent)}
+.turn p{margin:2px 0 0;font-size:14px}
+.turn.PT p{font-size:14.5px}
+.turn .flag{margin-top:6px;display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:500;padding:2px 8px;border-radius:999px;background:var(--surface2);cursor:pointer}
+.turn .flag.omitted{color:var(--om);background:var(--con-bg)} .turn .flag.partially{color:var(--par);background:var(--amb-bg)} .turn .flag.contradicted{color:var(--con);background:var(--con-bg)}
+.turn .flag.captured{color:var(--sup);background:var(--sup-bg)}
+.turn .flag .n{font-family:var(--mono);font-weight:400;opacity:.8}
+.turn .flag.weak{opacity:.55;outline:1px dashed currentColor;outline-offset:-1px}
+.turn.hit{background:var(--surface2);border-color:var(--rule)}
+.turn.active{border-color:var(--focus);box-shadow:0 0 0 2px var(--focus) inset;background:var(--surface2)}
+.turn .card{grid-column:1/-1;margin:6px 0 4px}
+.legend{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin:0 0 14px}
+.legend span{display:inline-flex;gap:5px;align-items:center}
+footer{border-top:1px solid var(--rule);padding:8px 16px;font-size:12px;color:var(--muted);background:var(--surface);display:flex;gap:18px;flex-wrap:wrap}
+footer code{font-family:var(--mono)}
+kbd{font:11px var(--mono);border:1px solid var(--rule);border-radius:3px;padding:0 4px}
+@media (max-width:760px){
+  main{display:block;overflow:visible}
+  .pane{overflow:visible;height:auto;padding-bottom:24px}
+  .pane+.pane{border-left:0;border-top:1px solid var(--rule)}
+  .controls{margin-left:0}
+  html,body{height:auto}
+  body{min-height:100%}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+
+<header>
+  <div class="brand">
+    <h1>Scribe Verify</h1>
+    <div class="meta" id="meta"></div>
+  </div>
+  <div class="stats" id="stats" role="group" aria-label="Filter draft by verdict"></div>
+  <div class="controls">
+    <label title="Verdicts at or above this confidence are trusted; below it the sentence gets a dashed underline for human review (mirrors the cookbook's AUTO_ACCEPT).">Auto-accept ≥ <span id="thrv" style="font-family:var(--mono)">0.80</span>
+      <input type="range" id="thr" min="0.5" max="1" step="0.05" value="0.8"></label>
+    <button class="toggle" id="colorToggle" aria-pressed="true">Support colors</button>
+    <button class="toggle" id="idToggle" aria-pressed="false">IDs</button>
+  </div>
+</header>
+
+<main>
+  <section class="pane" id="draftPane" aria-label="AI-drafted note">
+    <h2>AI scribe draft</h2>
+    <p class="sub">Click any sentence to see whether the encounter transcript supports it, and jump to the source.</p>
+    <div class="legend">
+      <span><i class="dot supported"></i>supported</span><span><i class="dot contradicted"></i>contradicted</span><span><i class="dot not_found"></i>not found</span><span><i class="dot ambiguous"></i>ambiguous</span><span><i class="dot observation"></i>clinician observation</span><span>dashed = below auto-accept</span>
+    </div>
+    <article class="note" id="note"></article>
+  </section>
+  <section class="pane" id="txPane" aria-label="Encounter transcript">
+    <h2>Encounter transcript</h2>
+    <p class="sub">Each turn was checked the other way round: is what was said reflected in the draft?</p>
+    <div class="legend">
+      <span><i class="dot omitted"></i>omitted from draft</span><span><i class="dot partially"></i>partially captured</span><span><i class="dot contradicted"></i>draft says otherwise</span>
+    </div>
+    <div id="tx"></div>
+  </section>
+</main>
+<footer id="foot"></footer>
+
+<script>
+const DATA = __DATA__;
+const VERDICTS = ["supported","contradicted","not_found","ambiguous"];
+const LABEL = {supported:"Supported",contradicted:"Contradicted",not_found:"Not found",ambiguous:"Ambiguous",observation:"Observation"};
+const COLOR = {supported:"var(--sup)",contradicted:"var(--con)",not_found:"var(--nf)",ambiguous:"var(--amb)",observation:"var(--obs)",captured:"var(--sup)",partially:"var(--par)",omitted:"var(--om)",not_clinical:"var(--obs)"};
+const isObs = c => c.section.startsWith("Mental Status");
+const turnById = Object.fromEntries(DATA.turns.map(t=>[t.id,t]));
+const claimsBySource = {};
+DATA.claims.forEach(c=>{ if(c.source!=="none"){ (claimsBySource[c.source] ||= []).push(c);} });
+let thr = 0.8, filter = null, activeClaim = null, activeTurn = null;
+
+function cls(c){ return isObs(c) ? "observation" : c.verdict; }
+
+// ---------- header ----------
+document.getElementById("meta").textContent = `${DATA.patient.name}, ${DATA.patient.age}${DATA.patient.sex} · ${DATA.patient.visit} · fabricated encounter`;
+function renderStats(){
+  const counts = {}; DATA.claims.forEach(c=>{ const k=cls(c); counts[k]=(counts[k]||0)+1; });
+  const el = document.getElementById("stats"); el.innerHTML = "";
+  ["supported","contradicted","not_found","ambiguous","observation"].forEach(k=>{
+    const b = document.createElement("button"); b.className="chip"; b.dataset.on = filter===k ? "1":"0";
+    b.innerHTML = `<i class="dot ${k}"></i>${LABEL[k]} <span class="n">${counts[k]||0}</span>`;
+    b.title = filter===k ? "Show all sentences" : `Show only ${LABEL[k].toLowerCase()} sentences`;
+    b.onclick = ()=>{ filter = filter===k ? null : k; renderStats(); applyFilter(); };
+    el.appendChild(b);
+  });
+  const om = DATA.turns.filter(t=>t.capture==="omitted"&&t.confidence>=0.5).length;
+  const b = document.createElement("span"); b.className="chip"; b.style.cursor="default";
+  b.innerHTML = `<i class="dot omitted"></i>Omitted turns <span class="n">${om}</span>`; b.title="Transcript turns whose content appears nowhere in the draft (confidence ≥ 0.5)";
+  el.appendChild(b);
+}
+function applyFilter(){ document.querySelectorAll(".claim").forEach(s=>{ s.classList.toggle("dim", !!filter && !s.classList.contains(filter)); }); }
+
+// ---------- draft ----------
+function renderNote(){
+  const note = document.getElementById("note"); note.innerHTML = "";
+  let section = null, p = null;
+  DATA.claims.forEach(c=>{
+    if(c.section!==section){ section=c.section; const h=document.createElement("h3"); h.textContent=section; note.appendChild(h); p=document.createElement("p"); p.style.margin="0"; note.appendChild(p); }
+    const s = document.createElement("span"); s.className = `claim ${cls(c)}`; s.id = "c-"+c.id; s.tabIndex = 0; s.setAttribute("role","button");
+    s.dataset.id = c.id;
+    s.innerHTML = `${c.text}<span class="cid">${c.id}</span> `;
+    s.onclick = ()=>selectClaim(c.id); s.onkeydown = e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); selectClaim(c.id);} };
+    p.appendChild(s);
+  });
+  applyThreshold();
+}
+function applyThreshold(){
+  DATA.claims.forEach(c=>{ const s=document.getElementById("c-"+c.id); s.classList.toggle("review", !isObs(c) && c.confidence < thr); s.title = `${LABEL[cls(c)]} · confidence ${c.confidence.toFixed(2)}${c.source!=="none"?" · source "+c.source:""}`; });
+}
+function bars(probs, keys){
+  return `<div class="bars">${keys.map(k=>`<span class="lbl">${(LABEL[k]||k).toLowerCase().replace("_"," ")}</span><span class="bar"><i style="width:${Math.round((probs[k]||0)*100)}%;background:${COLOR[k]||"var(--accent)"}"></i></span><span class="pct">${((probs[k]||0)*100).toFixed(0)}%</span>`).join("")}</div>`;
+}
+function claimCard(c){
+  const k = cls(c); const src = c.source!=="none" ? turnById[c.source] : null;
+  const alts = c.source_alts.filter(a=>a[0]!==c.source && a[0]!=="none").map(a=>`<code>${a[0]}</code> ${(a[1]*100).toFixed(0)}%`).join(", ");
+  const obsNote = k==="observation" ? `<div class="alts">Mental status findings are the clinician's observations, not something the patient said. A transcript check can only confirm they weren't contradicted; they stay the clinician's to attest.</div>` : "";
+  const review = !isObs(c) && c.confidence < thr ? `<div class="alts">Below the ${thr.toFixed(2)} auto-accept threshold, so this sentence is routed to human review.</div>` : "";
+  return `<div class="card ${k}" role="region" aria-label="Verification for ${c.id}">
+    <div class="q">Is this statement supported by the encounter transcript?</div>
+    <div class="verdict"><b style="color:${COLOR[k]}">${LABEL[k]}${k==="observation"?" · "+LABEL[c.verdict].toLowerCase():""}</b><span class="conf">confidence ${c.confidence.toFixed(2)} · ${c.latency_s}s · ${c.usage.input_tokens.toLocaleString()} tokens</span></div>
+    ${bars(c.probs, VERDICTS)}
+    ${src ? `<div class="src"><span class="who">${src.id} · ${src.t} · ${src.speaker==="DR"?"Clinician":"Patient"} · source confidence ${(c.source_conf*100).toFixed(0)}%</span><q>${src.text}</q></div>` : `<div class="src none">No transcript turn addresses this sentence (${(c.source_conf*100).toFixed(0)}% confident). If the scribe wrote it, it came from somewhere other than this encounter.</div>`}
+    ${alts ? `<div class="alts">Other candidate turns: ${alts}</div>` : ""}
+    ${obsNote}${review}
+    <div class="actions">${src?`<button class="primary" data-go="${src.id}">Show in transcript</button>`:""}<button data-act="accept">Accept</button><button data-act="edit">Edit sentence</button><button data-act="remove">Remove</button></div>
+  </div>`;
+}
+function selectClaim(id){
+  document.querySelectorAll("#note .card").forEach(e=>e.remove());
+  document.querySelectorAll(".claim.active").forEach(e=>e.classList.remove("active"));
+  document.querySelectorAll(".turn.hit,.turn.active").forEach(e=>e.classList.remove("hit","active"));
+  if(activeClaim===id){ activeClaim=null; return; }
+  activeClaim = id; const c = DATA.claims.find(x=>x.id===id); const s = document.getElementById("c-"+id); s.classList.add("active");
+  const holder = document.createElement("div"); holder.innerHTML = claimCard(c); const card = holder.firstElementChild;
+  s.parentElement.insertAdjacentElement("afterend", card);
+  card.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>goTurn(b.dataset.go));
+  card.querySelectorAll("[data-act]").forEach(b=>b.onclick=()=>{ b.textContent = {accept:"Accepted (demo)",edit:"Editing (demo)",remove:"Removed (demo)"}[b.dataset.act]; });
+  c.source_alts.forEach(a=>{ if(a[0]!=="none"){ const t=document.getElementById("t-"+a[0]); if(t) t.classList.add("hit"); } });
+  card.scrollIntoView({behavior:"smooth",block:"nearest"});
+  if(c.source!=="none") goTurn(c.source);
+}
+function goTurn(id){
+  document.querySelectorAll(".turn.active").forEach(e=>e.classList.remove("active"));
+  const t = document.getElementById("t-"+id); if(!t) return; t.classList.add("active");
+  t.scrollIntoView({behavior:"smooth",block:"center"});
+}
+
+// ---------- transcript ----------
+function renderTx(){
+  const tx = document.getElementById("tx"); tx.innerHTML = "";
+  DATA.turns.forEach(t=>{
+    const d = document.createElement("div"); d.className = `turn ${t.speaker}`; d.id = "t-"+t.id;
+    const flaggable = ["omitted","partially","contradicted"].includes(t.capture);
+    const flag = flaggable ? `<button class="flag ${t.capture}${t.confidence<0.5?" weak":""}" data-turn="${t.id}" title="${t.confidence<0.5?"Low confidence, needs a human look. ":""}Click for the capture verdict"><i class="dot ${t.capture==='contradicted'?'contradicted':t.capture}"></i>${{omitted:"Omitted from draft",partially:"Partially captured",contradicted:"Draft says otherwise"}[t.capture]} <span class="n">${t.confidence.toFixed(2)}</span></button>` : "";
+    d.innerHTML = `<div class="t">${t.t}</div><div><div class="who">${t.speaker==="DR"?"Dr. Okafor":"Patient"} <span style="font-family:var(--mono);font-weight:400;letter-spacing:0;text-transform:none">${t.id}</span></div><p>${t.text}</p>${flag}</div>`;
+    tx.appendChild(d);
+  });
+  tx.querySelectorAll(".flag").forEach(b=>b.onclick=()=>selectTurn(b.dataset.turn));
+}
+function turnCard(t){
+  const linked = (claimsBySource[t.id]||[]);
+  const links = linked.length ? `<div class="alts">Draft sentences that cite this turn: ${linked.map(c=>`<button data-claim="${c.id}" style="text-decoration:underline;color:${COLOR[cls(c)]};padding:0">${c.id} · ${LABEL[cls(c)].toLowerCase()}</button>`).join(" · ")}</div>` : `<div class="alts">No draft sentence cites this turn.</div>`;
+  return `<div class="card ${t.capture==='omitted'?'contradicted':t.capture==='partially'?'ambiguous':t.capture==='contradicted'?'contradicted':'supported'}">
+    <div class="q">Does the draft note capture the clinically relevant content of this turn?</div>
+    <div class="verdict"><b style="color:${COLOR[t.capture]}">${t.capture.replace("_"," ")}</b><span class="conf">confidence ${t.confidence.toFixed(2)} · ${t.latency_s}s</span></div>
+    ${bars(t.probs, ["captured","partially","omitted","contradicted","not_clinical"])}
+    ${links}
+    <div class="actions"><button class="primary" data-act="add">Add to draft</button><button data-act="ignore">Not needed in note</button></div>
+  </div>`;
+}
+function selectTurn(id){
+  document.querySelectorAll("#tx .card").forEach(e=>e.remove());
+  if(activeTurn===id){ activeTurn=null; return; }
+  activeTurn = id; const t = turnById[id]; const d = document.getElementById("t-"+id);
+  const holder = document.createElement("div"); holder.innerHTML = turnCard(t); const card = holder.firstElementChild; d.appendChild(card);
+  card.querySelectorAll("[data-claim]").forEach(b=>b.onclick=()=>{ selectClaim(b.dataset.claim); document.getElementById("c-"+b.dataset.claim).scrollIntoView({behavior:"smooth",block:"center"}); });
+  card.querySelectorAll("[data-act]").forEach(b=>b.onclick=()=>{ b.textContent = b.dataset.act==="add" ? "Added (demo)" : "Dismissed (demo)"; });
+  goTurn(id);
+}
+
+// ---------- controls ----------
+document.getElementById("thr").oninput = e=>{ thr=parseFloat(e.target.value); document.getElementById("thrv").textContent=thr.toFixed(2); applyThreshold(); if(activeClaim){ const id=activeClaim; activeClaim=null; selectClaim(id);} };
+document.getElementById("colorToggle").onclick = e=>{ const on = e.currentTarget.getAttribute("aria-pressed")!=="true"; e.currentTarget.setAttribute("aria-pressed", on); document.body.classList.toggle("colored", on); };
+document.getElementById("idToggle").onclick = e=>{ const on = e.currentTarget.getAttribute("aria-pressed")!=="true"; e.currentTarget.setAttribute("aria-pressed", on); document.body.classList.toggle("ids", on); };
+document.body.classList.add("colored");
+document.getElementById("foot").innerHTML = `<span>Checked by <code>${DATA.model}</code> via TypeSafe systemone API, ${DATA.run_at}</span><span><code>${DATA.calls}</code> calls (${DATA.claims.length} sentences forward, ${DATA.turns.length} turns reverse)</span><span><code>${DATA.wall_s}s</code> wall clock, 6 in parallel</span><span><code>${DATA.input_tokens.toLocaleString()}</code> input / <code>${DATA.output_tokens.toLocaleString()}</code> output tokens</span><span>Encounter and note are fabricated for this demo.</span>`;
+renderStats(); renderNote(); renderTx();
+</script>
