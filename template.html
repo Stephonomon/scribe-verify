@@ -122,6 +122,7 @@ kbd{font:11px var(--mono);border:1px solid var(--rule);border-radius:3px;padding
       <input type="range" id="thr" min="0.5" max="1" step="0.05" value="0.8"></label>
     <button class="toggle" id="colorToggle" aria-pressed="true">Support colors</button>
     <button class="toggle" id="idToggle" aria-pressed="false">IDs</button>
+    <button class="toggle" id="themeToggle" aria-pressed="false" title="Switch between light and dark">Dark</button>
   </div>
 </header>
 
@@ -204,12 +205,12 @@ function claimCard(c){
   const review = !isObs(c) && c.confidence < thr ? `<div class="alts">Below the ${thr.toFixed(2)} auto-accept threshold, so this sentence is routed to human review.</div>` : "";
   return `<div class="card ${k}" role="region" aria-label="Verification for ${c.id}">
     <div class="q">Is this statement supported by the encounter transcript?</div>
-    <div class="verdict"><b style="color:${COLOR[k]}">${LABEL[k]}${k==="observation"?" · "+LABEL[c.verdict].toLowerCase():""}</b><span class="conf">confidence ${c.confidence.toFixed(2)} · ${c.latency_s}s · ${c.usage.input_tokens.toLocaleString()} tokens</span></div>
+    <div class="verdict"><b style="color:${COLOR[k]}">${LABEL[k]}${k==="observation"?" · "+LABEL[c.verdict].toLowerCase():""}</b><span class="conf">confidence ${c.confidence.toFixed(2)}</span></div>
     ${bars(c.probs, VERDICTS)}
     ${src ? `<div class="src"><span class="who">${src.id} · ${src.t} · ${src.speaker==="DR"?"Clinician":"Patient"} · source confidence ${(c.source_conf*100).toFixed(0)}%</span><q>${src.text}</q></div>` : `<div class="src none">No transcript turn addresses this sentence (${(c.source_conf*100).toFixed(0)}% confident). If the scribe wrote it, it came from somewhere other than this encounter.</div>`}
     ${alts ? `<div class="alts">Other candidate turns: ${alts}</div>` : ""}
     ${obsNote}${review}
-    <div class="actions">${src?`<button class="primary" data-go="${src.id}">Show in transcript</button>`:""}<button data-act="accept">Accept</button><button data-act="edit">Edit sentence</button><button data-act="remove">Remove</button></div>
+    ${src?`<div class="actions"><button class="primary" data-go="${src.id}">Show in transcript</button></div>`:""}
   </div>`;
 }
 function selectClaim(id){
@@ -221,7 +222,6 @@ function selectClaim(id){
   const holder = document.createElement("div"); holder.innerHTML = claimCard(c); const card = holder.firstElementChild;
   s.parentElement.insertAdjacentElement("afterend", card);
   card.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>goTurn(b.dataset.go));
-  card.querySelectorAll("[data-act]").forEach(b=>b.onclick=()=>{ b.textContent = {accept:"Accepted (demo)",edit:"Editing (demo)",remove:"Removed (demo)"}[b.dataset.act]; });
   c.source_alts.forEach(a=>{ if(a[0]!=="none"){ const t=document.getElementById("t-"+a[0]); if(t) t.classList.add("hit"); } });
   card.scrollIntoView({behavior:"smooth",block:"nearest"});
   if(c.source!=="none") goTurn(c.source);
@@ -249,7 +249,7 @@ function turnCard(t){
   const links = linked.length ? `<div class="alts">Draft sentences that cite this turn: ${linked.map(c=>`<button data-claim="${c.id}" style="text-decoration:underline;color:${COLOR[cls(c)]};padding:0">${c.id} · ${LABEL[cls(c)].toLowerCase()}</button>`).join(" · ")}</div>` : `<div class="alts">No draft sentence cites this turn.</div>`;
   return `<div class="card ${t.capture==='omitted'?'contradicted':t.capture==='partially'?'ambiguous':t.capture==='contradicted'?'contradicted':'supported'}">
     <div class="q">Does the draft note capture the clinically relevant content of this turn?</div>
-    <div class="verdict"><b style="color:${COLOR[t.capture]}">${t.capture.replace("_"," ")}</b><span class="conf">confidence ${t.confidence.toFixed(2)} · ${t.latency_s}s</span></div>
+    <div class="verdict"><b style="color:${COLOR[t.capture]}">${t.capture.replace("_"," ")}</b><span class="conf">confidence ${t.confidence.toFixed(2)}</span></div>
     ${bars(t.probs, ["captured","partially","omitted","contradicted","not_clinical"])}
     ${links}
     <div class="actions"><button class="primary" data-act="add">Add to draft</button><button data-act="ignore">Not needed in note</button></div>
@@ -270,6 +270,19 @@ document.getElementById("thr").oninput = e=>{ thr=parseFloat(e.target.value); do
 document.getElementById("colorToggle").onclick = e=>{ const on = e.currentTarget.getAttribute("aria-pressed")!=="true"; e.currentTarget.setAttribute("aria-pressed", on); document.body.classList.toggle("colored", on); };
 document.getElementById("idToggle").onclick = e=>{ const on = e.currentTarget.getAttribute("aria-pressed")!=="true"; e.currentTarget.setAttribute("aria-pressed", on); document.body.classList.toggle("ids", on); };
 document.body.classList.add("colored");
+(function(){
+  const root = document.documentElement, btn = document.getElementById("themeToggle");
+  let saved = null; try { saved = localStorage.getItem("scribe-theme"); } catch(e){}
+  if(saved==="dark"||saved==="light") root.dataset.theme = saved;
+  const isDark = ()=> root.dataset.theme ? root.dataset.theme==="dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  const paint = ()=>{ const d=isDark(); btn.textContent = d ? "Light" : "Dark"; btn.setAttribute("aria-pressed", d); };
+  btn.onclick = ()=>{ const next = isDark() ? "light" : "dark"; root.dataset.theme = next; try { localStorage.setItem("scribe-theme", next); } catch(e){} paint(); };
+  paint();
+})();
+// 4. click on blank space in the draft pane closes the open card
+document.getElementById("draftPane").addEventListener("click", e=>{
+  if(activeClaim && !e.target.closest(".claim") && !e.target.closest(".card") && !e.target.closest(".legend")) selectClaim(activeClaim);
+});
 document.getElementById("foot").innerHTML = `<span>Checked by <code>${DATA.model}</code> via TypeSafe systemone API, ${DATA.run_at}</span><span><code>${DATA.calls}</code> calls (${DATA.claims.length} sentences forward, ${DATA.turns.length} turns reverse)</span><span><code>${DATA.wall_s}s</code> wall clock, 6 in parallel</span><span><code>${DATA.input_tokens.toLocaleString()}</code> input / <code>${DATA.output_tokens.toLocaleString()}</code> output tokens</span><span>Encounter and note are fabricated for this demo.</span>`;
 renderStats(); renderNote(); renderTx();
 </script>
