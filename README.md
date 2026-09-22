@@ -11,7 +11,11 @@ that never made it into the note are flagged as omissions.
 
 **Live demo:** https://stephonomon.github.io/scribe-verify/  (self-contained page, results are embedded, no API calls from the browser)
 
-![The draft on the left, colour-coded by transcript support; the transcript on the right with omission flags](docs/draft-view.png)
+**Video walkthrough:** https://youtu.be/d_vqWMtRmOI
+
+[![Watch the walkthrough on YouTube. The draft on the left, colour-coded by transcript support; the transcript on the right with omission flags](docs/draft-view.png)](https://youtu.be/d_vqWMtRmOI)
+
+▶ [Watch Stephon walk through the demo on YouTube](https://youtu.be/d_vqWMtRmOI)
 
 > Everything here is fabricated. There is no real patient, clinician, or recording. The encounter, the note,
 > and the seeded errors were written for this demo. Nothing in this repository is medical advice or a validated
@@ -65,11 +69,11 @@ underline for human review, mirroring the cookbook's `AUTO_ACCEPT` threshold.
 ### The viewer
 
 - **Left:** the AI draft, one span per sentence. Colour encodes the verdict; the underline style encodes whether it cleared the threshold.
-- **Right:** the transcript with timestamps and speaker. Turns the draft missed or contradicted carry a flag.
-- Click a sentence to open its verification card (verdict, probabilities, the source turn quoted, other candidate turns) and scroll the transcript to the source.
+- **Right:** the transcript with timestamps and speaker. Turns the draft missed or contradicted carry a flag; flags below 0.5 confidence are faded.
+- Click a sentence to open its verification card (verdict, Jev's probability over the four options, the source turn quoted, other candidate turns) and scroll the transcript to the source. Click blank space in the draft to close it.
 - Click a transcript flag to see the capture verdict and which draft sentences cite that turn.
-- The header chips filter the draft by verdict. **Support colors** turns the colouring off for a before/after. **IDs** shows sentence IDs.
-- Accept / Edit / Remove / Add to draft are placeholders that show where this would plug into a real scribe's sign-off flow.
+- The header chips filter the draft by verdict. The **auto-accept** slider sets the confidence threshold. **Support colors** turns the colouring off for a before/after. **IDs** shows sentence IDs. **Dark / Light** switches theme and remembers your choice in the browser.
+- "Add to draft" and "Not needed in note" on the transcript cards are placeholders that show where this would plug into a real scribe's sign-off flow. Nothing is edited.
 
 ## Results
 
