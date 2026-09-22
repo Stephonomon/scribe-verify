@@ -102,19 +102,65 @@ Mental status exam sentences ("well groomed, cooperative") come back `not_found`
 clinician's observations, not something anyone said, and the viewer treats them as a separate category
 rather than as errors.
 
-### One call, many questions
+### One call, many questions (fan-out)
 
 The 111-call run treats each sentence as its own request. Jev's API also accepts many questions over one
-`state` in a single call. [`fanout_probe.py`](fanout_probe.py) sends all 37 forward questions in one request:
+`state` in a single call, and answers them independently: each question gets its own probability distribution,
+and none of them can see the others. [`fanout_probe.py`](fanout_probe.py) tests that on this note.
+
+**Run A: the 37 support questions in one call.**
 
 | | 37 separate calls | 1 call × 37 questions |
 |---|---|---|
-| Latency | 15.1 s summed (6.9 s wall, 6-wide) | **0.90 s** |
+| Latency | 15.1 s summed (6.9 s wall, 6-wide) | **0.5 s** |
 | Input tokens | 222,722 | **13,044** |
 | Verdicts | — | identical, 37 / 37 |
 
-That is the property that makes this shape interesting for scribing: a short transcript supports dozens of
-independent yes/no questions, and they can all ride on one copy of the transcript.
+**Run B: the real-life shape, support *and* source-turn for every sentence.** The source question is a 75-way
+choice (one option per turn plus `none`), which costs about 2.9k tokens per question, so 37 of them exceed Jev's
+64k-token request cap. Chunked into three calls run in parallel (support; source for the first half; source for
+the second half):
+
+| | 37 separate calls | 3 parallel calls, 74 questions |
+|---|---|---|
+| Wall-clock | 6.9 s | **0.84 s** |
+| Input tokens | 222,722 | **111,263** (13k + 48k + 50k) |
+| Output tokens | 4,800 | 27,503 (free) |
+| Verdicts | — | identical, 37 / 37 |
+| Source turns | — | 34 / 37 agree; the three differences pick the clinician's statement over the patient's acknowledgement of it, or vice versa |
+
+So a short transcript supports dozens of independent yes/no questions, and they ride on one copy of the
+transcript. The obvious next optimisation is to shrink the source question (retrieve a handful of candidate turns
+first, then ask Jev to pick), which would bring Run B down to a single call.
+
+### Estimated cost as each would actually be used
+
+*Estimates, not a benchmark.* The Jev column is measured (Run B above). The Haiku column is how a scribe vendor
+would plausibly wire a frontier-lab model: one request per sentence, the transcript in the system prompt, structured
+output for verdict, source turn and confidence. Its input tokens are measured with Anthropic's token-counting
+endpoint on the real prompts; its output tokens (~45 per sentence) and latency are estimates. Prices: Claude Haiku 4.5
+at $1 / $5 per million input / output tokens, cache writes at 1.25× and cache reads at 0.1×; Jev at $0.042 per
+million input tokens with output free, from TypeSafe's docs as of 2026-09-20. Check both before quoting.
+
+| Per encounter (37 sentences) | Haiku 4.5, 37 calls, no cache | Haiku 4.5, 37 calls, transcript cached | Jev, 3 parallel calls |
+|---|---|---|---|
+| Input tokens | 100,643 | 8,809 fresh + 2,482 cache write + 89,352 cache read | 111,263 |
+| Output tokens | ~1,700 | ~1,700 | 27,503 (free) |
+| Cost | ~$0.109 | ~$0.029 | ~$0.0047 |
+| Wall-clock | ~7–12 s at 6 in parallel | same | 0.84 s |
+| Cost ratio vs Jev | ~23× | ~6× | 1× |
+
+| Encounters | Haiku, cached | Haiku, uncached | Jev |
+|---|---|---|---|
+| 1,000 | $29 | $109 | $4.70 |
+| 100,000 | $2,900 | $10,900 | $470 |
+| 1,000,000 | $29,000 | $109,000 | $4,700 |
+
+Two honest readings. First, both are cheap in absolute terms: a cached Haiku verification layer costs about three
+cents per note. Second, the Jev advantage at this shape is roughly 6× on cost and 10× on latency, not the 50× the
+support-only probe suggested, because the 75-way source question is expensive. This table says nothing about
+accuracy or calibration, which only the benchmark below would settle. This encounter is short (about seven minutes,
+37 sentences); a 15–20 minute visit with 80 sentences would roughly double or triple every row, and the ratios should hold.
 
 ## Limitations, honestly
 
@@ -127,8 +173,9 @@ independent yes/no questions, and they can all ride on one copy of the transcrip
 
 ## What I'd benchmark next
 
-One transcript × ~50 Jev questions in a single call, versus one transcript × one structured-output request to a
-frontier LLM, on:
+A 2 × 2: Jev and a Claude model, each run both as one batched request and as one request per sentence. The Jev row is
+done (verdicts identical either way). The Claude row is the open question, and the comparison should report cost
+both uncached and with prompt caching. Measure:
 
 - latency and cost per encounter
 - extraction accuracy against the seeded labels
@@ -153,7 +200,7 @@ open index.html
 |---|---|
 | [`data.py`](data.py) | The 74-turn transcript, the 37-sentence draft with hidden ground-truth labels, and the omission ground truth |
 | [`verify.py`](verify.py) | The two Jev passes. The question definitions are at the top and are the whole "prompt" |
-| [`fanout_probe.py`](fanout_probe.py) | All forward questions in one API call, compared against `results.json` |
+| [`fanout_probe.py`](fanout_probe.py) | Every forward question over one copy of the transcript (Runs A and B), compared against `results.json`; writes `fanout_result.json` |
 | [`template.html`](template.html) | The viewer (no framework, no build step, works offline) |
 | [`build.py`](build.py) | Embeds `results.json` into the template and strips the ground-truth labels |
 | [`index.html`](index.html) | The built page that GitHub Pages serves |

@@ -1,0 +1,22 @@
+{
+ "A": {
+  "calls": 1,
+  "latency_s": 0.51,
+  "input_tokens": 13044,
+  "output_tokens": 1901,
+  "verdict_agreement": 37
+ },
+ "B": {
+  "calls": 3,
+  "wall_s": 0.84,
+  "per_call_input": [
+   13044,
+   47854,
+   50365
+  ],
+  "input_tokens": 111263,
+  "output_tokens": 27503,
+  "verdict_agreement": 37,
+  "source_agreement": 34
+ }
+}
